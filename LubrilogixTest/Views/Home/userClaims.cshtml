@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "userClaims";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>userClaims</h1>
+
+
+<div>
+    <ul>
+        @if (ViewBag.Claims != null)
+        {
+            foreach (var claim in ViewBag.Claims)
+            {
+                <li>@claim.Type: @claim.Value</li>
+            }
+        }
+    </ul>
+</div>

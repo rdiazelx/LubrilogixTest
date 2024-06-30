@@ -1,0 +1,183 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.container-login {
+    width: 15%;
+    height: 100%; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    background-color: darkred;
+    position: fixed; /* or absolute depending on your layout */
+    right: 0; /* Position to the left */
+}
+.container-menu {
+    width: 15%;
+    height: 200%; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    background-color: forestgreen;
+    position: fixed; /* or absolute depending on your layout */
+    left: 0; /* Position to the left */
+ }
+/* General Styles */
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    background-color: #e0e0e0;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 12%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #343a40;
+    border-right: 1px solid #ddd;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s;
+}
+
+    .sidebar.collapsed {
+        width: 70px; /* Adjust this value as needed */
+    }
+
+.navbar-nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link-menu {
+    display: flex;
+    align-items: center;
+    color: white; /* Change text color to white */
+    font-weight: bold; /* Make text bold */
+    text-decoration: none;
+    padding: 1rem;
+    white-space: nowrap;
+}
+
+    .nav-link-menu:hover {
+        background-color: #1b6ec2; /* Add hover effect */
+        color: white;
+    }
+
+    .nav-link-menu span {
+        margin-left: 10px;
+    }
+
+    .nav-link-menu .menu-text {
+        transition: opacity 0.3s;
+    }
+
+.sidebar.collapsed .menu-text {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.toggle-button {
+    background-color: #1b6ec2;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    align-self: flex-end;
+    margin: 1rem;
+    font-size: 1rem;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 1rem;
+    width: 100%;
+    transition: margin-left 0.3s;
+}
+
+.sidebar.collapsed + .main-content {
+    margin-left: 70px; /* Adjust this value to match the collapsed sidebar width */
+}

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Proveedores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Proveedores</h1>
+
+@{
+    var specificGroupId = "724896d2-9e76-4f63-8129-1a22305cb5d5"; //IdGrupo LubrilogixAdmin
+    var groupClaims = ViewBag.GroupClaims as List<string>;
+
+    // Debug output
+    <div>
+        @* <p>Group Claims:</p>*@
+        @if (groupClaims != null && groupClaims.Any())
+        {
+            // <ul>
+            //     @foreach (var group in groupClaims)
+            //     {
+            //         <li>@group</li>
+            //     }
+            // </ul>
+
+
+            /////////////////////////////////////////////
+            ///Aqui va la logica de la vista
+            /////////////////////////////////
+        }
+        else
+        {
+            <p>No group claims found.</p>
+        }
+    </div>
+
+    var userInSpecificGroup = groupClaims != null && groupClaims.Contains(specificGroupId);
+}
+
+@if (userInSpecificGroup)
+{
+    <h2>Si estas viendo esto eres un administrador</h2>
+    <h2>Esto no es visible para el usuario</h2>
+}

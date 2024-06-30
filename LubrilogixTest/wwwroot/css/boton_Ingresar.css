@@ -1,0 +1,54 @@
+﻿.ingresar-container {
+    width: 100%;
+    height: 5%; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    position: absolute; /* or absolute depending on your layout */
+    right: 0; /* Position to the left */
+    top: 0%
+}
+
+.box {
+    width: 6%;
+    height: 4%; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    background-color: darkgreen;
+    position: fixed; /* or absolute depending on your layout */
+    top: 2%;
+    border-radius: 50px;
+    border: 2px solid #ddd;
+}
+
+/* Set the nav-link text color to white with higher specificity */
+.navbar-navT .nav-itemT .nav-linkT {
+    color: white !important;
+}
+
+    /* Optional: Change the color of the nav-link text when hovered over */
+    .navbar-navT .nav-itemT .nav-link:hoverT {
+        color: white !important; /* Adjust this color as needed */
+    }
+.welcome-message-container {
+    width: 100%;
+    height: 10%; /* Full viewport height */
+    display: flex;
+    background-color: none;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    position: absolute; /* or absolute depending on your layout */
+    right: 0; /* Position to the left */
+    top: 10%
+}
+
+.box-name {
+    width: 15%;
+    height: 12%; /* Full viewport height */
+    display: flex;
+    background-color: white;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    position: fixed; /* or absolute depending on your layout */
+}
