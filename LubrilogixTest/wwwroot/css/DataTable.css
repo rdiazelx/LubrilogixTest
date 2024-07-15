@@ -1,0 +1,58 @@
+﻿
+.dt-buttons {
+    margin-top: 10px;
+}
+
+    .dt-buttons button {
+        margin-right: 5px;
+        background-color: #906BCF;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    .table th, .table td {
+        text-align: center;
+        padding: 8px;
+        vertical-align: middle;
+    }
+
+    .table th {
+        color: white;
+        background-color: #93b2e2;
+        text-align: center;
+    }
+
+table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, table.dataTable tfoot td {
+    text-align: center;
+}
+
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+.table tbody tr:nth-child(odd) {
+    background-color: #e0e0e0;
+}
+
+
+
+
+.fa-2x {
+    font-size: 2em;
+}
+
+.fa-1-5x {
+    font-size: 1.5em;
+}
+
+.custom-icon-color {
+    color: #906BCF;
+}

@@ -3,14 +3,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/css/datatable.css" rel="stylesheet" />
+<link href="~/css/styles.css" rel="stylesheet" />
+
 <h1>Productos</h1>
+
+@model List<LubrilogixTest.Models.Producto>
 
 @{
     var specificGroupId = "724896d2-9e76-4f63-8129-1a22305cb5d5"; // IdGrupo LubrilogixAdmin
-
-
     var groupClaims = ViewBag.GroupClaims as List<string>;
-
     var userInSpecificGroup = groupClaims != null && groupClaims.Contains(specificGroupId);
 }
 
@@ -18,52 +20,48 @@
 {
     <h2>Si estás viendo esto eres un administrador</h2>
     <h2>Esto no es visible para el usuario</h2>
+
+
+
+
+    <div>
+        @if (groupClaims != null && groupClaims.Any())
+        {
+            <table class="table table-bordered table-striped" id="productosTable">
+                <thead>
+                    <tr>
+                        <th>ID Producto</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Subcategoría</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var producto in Model)
+                    {
+                        <tr>
+                            <td>@producto.TnIdProducto</td>
+                            <td>@producto.TcNombre</td>
+                            <td>@producto.TcCategoria</td>
+                            <td>@producto.TcSubcategoria</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No group claims found.</p>
+        }
+    </div>
 }
 
-@model List<LubrilogixTest.Models.Producto>
 
-<div>
-    @if (groupClaims != null && groupClaims.Any())
-    {
-        <table id="productosTable" class="display">
-            <thead>
-                <tr>
-                    <th>ID Producto</th>
-                    <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Subcategoría</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var producto in Model)
-                {
-                    <tr>
-                        <td>@producto.TnIdProducto</td>
-                        <td>@producto.TcNombre</td>
-                        <td>@producto.TcCategoria</td>
-                        <td>@producto.TcSubcategoria</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p>No group claims found.</p>
-    }
-</div>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#productosTable').DataTable();
-    });
-</script>
+<!-- Include jQuery, then DataTables CSS and JS files -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
 
-<style>
-    body {
-        background-color: #FEFAF1;
-    }
-</style>
+<script src="~/js/productos.js"></script>
+
