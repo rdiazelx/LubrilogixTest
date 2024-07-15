@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using LubrilogixTest.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,14 +14,15 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
     [Authorize]
     public class LubrilogixController : Controller
     {
-        private readonly ILogger<LubrilogixController> _logger;
 
-        public LubrilogixController(ILogger<LubrilogixController> logger)
+        private readonly ILogger<LubrilogixController> _logger;
+        private readonly LubrilogixDbContext _context;
+
+        public LubrilogixController(ILogger<LubrilogixController> logger, LubrilogixDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
-
-
 
         protected async Task<List<string>> GetGroupClaimsAsync()
         {
@@ -31,6 +34,8 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
 
             return new List<string>(); // Return an empty list or handle accordingly if user is not authenticated
         }
+
+    
 
 
         public IActionResult Inicio()
@@ -53,14 +58,22 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
         public async Task<IActionResult> Productos()
         {
             ViewBag.GroupClaims = await GetGroupClaimsAsync();
-            return View();
+
+            _logger.LogInformation("Fetching products."); // Logging the action
+            var productos = await _context.GetProductosAsync();
+            return View(productos);
         }
+
 
         public async Task<IActionResult> Sucursales()
         {
             ViewBag.GroupClaims = await GetGroupClaimsAsync();
             return View();
         }
+
+
+
+
 
 
     }
