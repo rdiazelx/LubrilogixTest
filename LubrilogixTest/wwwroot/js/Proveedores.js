@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-    // Initialize DataTable for the Inventario table
-    let table = new DataTable('#inventarioTable', {
+    // Initialize DataTable for the main table
+    let table = new DataTable('#proveedoresTable', {
         responsive: true,
         select: true,
         pageLength: 10,
@@ -8,45 +8,46 @@
         dom: 'lfrtip',
         order: [], // Prevent initial sorting
         columnDefs: [
-            { orderable: false, targets: [10] } // Disable sorting for the Edit column
+            { orderable: false, targets: [6] } // Disable sorting for the Edit column
         ],
         buttons: [], // Disable all buttons
     });
 
-    // Filter by Fecha
-    $('#fechaFilterIcon').on('click', function () {
-        $('#fechaFilter').toggle();
+    // Filter by Nombre
+    $('#provinciaFilterIcon').on('click', function () {
+        $('#nombreFilter').toggle();
     });
-    $('#fechaFilter').on('keyup', function () {
+    $('#nombreFilter').on('keyup', function () {
         table.columns(1).search(this.value).draw();
     });
 
-    // Filter by Sucursal
-    $('#sucursalFilterIcon').on('click', function () {
-        $('#sucursalFilter').toggle();
+    // Filter by provincia
+    $('#provinciaFilterIcon').on('click', function () {
+        $('#provinciaFilter').toggle();
     });
-    $('#sucursalFilter').on('keyup', function () {
-        table.columns(2).search(this.value).draw();
-    });
-
-    // Filter by Producto
-    $('#productoFilterIcon').on('click', function () {
-        $('#productoFilter').toggle();
-    });
-    $('#productoFilter').on('keyup', function () {
+    $('#provinciaFilter').on('keyup', function () {
         table.columns(3).search(this.value).draw();
     });
+
+
+    // Set initial filter value and apply it
+    $('#estadoFilter').val('Activo').trigger('keyup');
+
+    // Apply the filter on page load
+    table.columns(5).search('^Activo$', true, false).draw();
 
     // Filter by Estado
     $('#estadoFilterIcon').on('click', function () {
         $('#estadoFilter').toggle();
     });
+
     $('#estadoFilter').on('change', function () {
-        table.columns(10).search(this.value).draw();
+        const filterValue = this.value;
+        table.columns(6).search(filterValue ? '^' + filterValue + '$' : '', true, false).draw();
     });
 
     // Handle Edit icon click
-    $('#inventarioTable tbody').on('click', '.editIcon', function () {
+    $('#proveedoresTable tbody').on('click', '.editIcon', function () {
         let row = $(this).closest('tr');
         let data = table.row(row).data();
 
@@ -64,7 +65,7 @@
     });
 
     // Handle Save icon click
-    $('#inventarioTable tbody').on('click', '.saveIcon', function () {
+    $('#proveedoresTable tbody').on('click', '.saveIcon', function () {
         let row = $(this).closest('tr');
         let newData = [];
 

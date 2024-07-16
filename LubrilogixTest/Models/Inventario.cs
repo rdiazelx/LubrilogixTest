@@ -24,6 +24,7 @@ public partial class Inventario
     public int TnIdProveedor { get; set; }
 
     public decimal TnTotal { get; set; }
+    public string TC_Estado { get; set; } = null!; // Add the TcEstado property
 
     public virtual Producto TnIdProductoNavigation { get; set; } = null!;
 

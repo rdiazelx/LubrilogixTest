@@ -45,7 +45,7 @@ namespace WebApp_OpenIDConnect_DotNet
 
 
           });
-
+            services.AddMemoryCache();
             services.AddControllersWithViews(options =>
             {
                 var policy = new AuthorizationPolicyBuilder()

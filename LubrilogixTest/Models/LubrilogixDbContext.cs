@@ -202,6 +202,10 @@ public partial class LubrilogixDbContext : DbContext
 
 
     #region Read Data Procedures
+
+
+
+    #region Read data Productos
     public async Task<List<Producto>> GetProductosAsync()
     {
         var codErrorParam = new SqlParameter("@cod_error", SqlDbType.Int)
@@ -232,23 +236,133 @@ public partial class LubrilogixDbContext : DbContext
 
         return productos;
     }
+    #endregion
+
+    #region Read Data Proveedores
+
+    public async Task<List<Proveedore>> GetProveedoresAsync()
+    {
+        var codErrorParam = new SqlParameter("@cod_error", SqlDbType.Int)
+        {
+            Direction = ParameterDirection.Output
+        };
+
+        var msgErrorParam = new SqlParameter("@msg_error", SqlDbType.VarChar, 1000)
+        {
+            Direction = ParameterDirection.Output
+        };
+
+
+        var proveedores = await Proveedores
+            .FromSqlRaw("EXEC spLeerProveedores @cod_error = @cod_error OUTPUT, @msg_error = @msg_error OUTPUT",
+                codErrorParam, msgErrorParam)
+            .ToListAsync();
+
+        // You can access the error code and message here if needed
+        int codError = (int)codErrorParam.Value;
+        string msgError = (string)msgErrorParam.Value;
+
+        // Optionally, handle errors based on codError and msgError
+        if (codError != 0)
+        {
+            throw new Exception(msgError);
+        }
+
+        return proveedores;
+
+    }
+
+    #endregion
+       
+    #region Read Sucursales
+    public async Task<List<Sucursale>> GetSucursalesAsync()
+    {
+        var codErrorParam = new SqlParameter("@cod_error", SqlDbType.Int)
+        {
+            Direction = ParameterDirection.Output
+        };
+
+        var msgErrorParam = new SqlParameter("@msg_error", SqlDbType.VarChar, 1000)
+        {
+            Direction = ParameterDirection.Output
+        };
+
+
+        var sucursales = await Sucursales
+            .FromSqlRaw("EXEC spLeerSucursales @cod_error = @cod_error OUTPUT, @msg_error = @msg_error OUTPUT",
+                codErrorParam, msgErrorParam)
+            .ToListAsync();
+
+        // You can access the error code and message here if needed
+        int codError = (int)codErrorParam.Value;
+        string msgError = (string)msgErrorParam.Value;
+
+        // Optionally, handle errors based on codError and msgError
+        if (codError != 0)
+        {
+            throw new Exception(msgError);
+        }
+
+        return sucursales;
+
+    }
+
+    #endregion
+
+    #region Read data Inventario
+
+    public async Task<List<Inventario>> GetInventarioAsync()
+    {
+        var codErrorParam = new SqlParameter("@cod_error", SqlDbType.Int)
+        {
+            Direction = ParameterDirection.Output
+        };
+
+        var msgErrorParam = new SqlParameter("@msg_error", SqlDbType.VarChar, 1000)
+        {
+            Direction = ParameterDirection.Output
+        };
+
+        var inventario = await Inventarios
+            .FromSqlRaw("EXEC spLeerInventario @cod_error = @cod_error OUTPUT, @msg_error = @msg_error OUTPUT",
+                codErrorParam, msgErrorParam)
+            .ToListAsync();
+
+        // Handle error codes if necessary
+        int codError = (int)codErrorParam.Value;
+        string msgError = (string)msgErrorParam.Value;
+
+        if (codError != 0)
+        {
+            throw new Exception(msgError);
+        }
+
+        return inventario;
+    }
+
+
+
+    #endregion
+
+
+
     #endregion Read
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     #endregion
 
 }

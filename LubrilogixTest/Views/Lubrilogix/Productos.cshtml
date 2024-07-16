@@ -2,38 +2,67 @@
     ViewData["Title"] = "Productos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<link href="~/css/datatable.css" rel="stylesheet" />
-<link href="~/css/styles.css" rel="stylesheet" />
-
-<h1>Productos</h1>
-
 @model List<LubrilogixTest.Models.Producto>
-
+<script src="~/js/productos.js"></script>
 @{
     var specificGroupId = "724896d2-9e76-4f63-8129-1a22305cb5d5"; // IdGrupo LubrilogixAdmin
     var groupClaims = ViewBag.GroupClaims as List<string>;
     var userInSpecificGroup = groupClaims != null && groupClaims.Contains(specificGroupId);
 }
 
-@if (userInSpecificGroup)
-{
-    <h2>Si estás viendo esto eres un administrador</h2>
-    <h2>Esto no es visible para el usuario</h2>
+<h1>Productos</h1>
 
+<br />
+<br />
 
+<table id="filterTable" class="display">
+    <thead>
+        <tr>
+            <th>
+                <div class="filter-container">
+                    <i class="fas fa-filter" id="nombreFilterIcon"></i>
+                    <div class="filter-input">
+                        <input type="text" id="nombreFilter" placeholder="Filtro por nombre" style="display:none;" />
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="filter-container">
+                    <i class="fas fa-filter" id="categoriaFilterIcon"></i>
+                    <div class="filter-input">
+                        <input type="text" id="categoriaFilter" placeholder="Filtro por categoria" style="display:none;" />
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="filter-container">
+                    <i class="fas fa-filter" id="subCategoriaFilterIcon"></i>
+                    <div class="filter-input">
+                        <input type="text" id="subCategoriaFilter" placeholder="Filtro por subcategoria" style="display:none;" />
+                    </div>
+                </div>
+            </th>
+         </tr>
+    </thead>
+</table>
+
+<br />
 
 
     <div>
         @if (groupClaims != null && groupClaims.Any())
         {
-            <table class="table table-bordered table-striped" id="productosTable">
+        <table class="table table-bordered table-striped" id="productosTable">
                 <thead>
                     <tr>
                         <th>ID Producto</th>
                         <th>Nombre</th>
                         <th>Categoría</th>
                         <th>Subcategoría</th>
+                        @if (userInSpecificGroup)
+                        {
+                            <th>Edit</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +73,13 @@
                             <td>@producto.TcNombre</td>
                             <td>@producto.TcCategoria</td>
                             <td>@producto.TcSubcategoria</td>
+                            @if (userInSpecificGroup)
+                            {
+                                <td>
+                                    <i class="fas fa-edit editIcon"></i>
+                                    <i class="fas fa-save saveIcon" style="display:none;"></i>
+                                </td>
+                            }
                         </tr>
                     }
                 </tbody>
@@ -54,14 +90,11 @@
             <p>No group claims found.</p>
         }
     </div>
+
+
+@section Scripts {
+    <script src="~/js/productos.js"></script>
 }
 
 
-
-<!-- Include jQuery, then DataTables CSS and JS files -->
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-
-<script src="~/js/productos.js"></script>
 

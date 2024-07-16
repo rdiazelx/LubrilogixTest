@@ -3,10 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/css/filtertable.css" rel="stylesheet" />
-
-
-@model List<LubrilogixTest.Models.Producto>
+@model List<LubrilogixTest.Models.Inventario>
 
 @{
     var specificGroupId = "724896d2-9e76-4f63-8129-1a22305cb5d5"; // IdGrupo LubrilogixAdmin
@@ -15,122 +12,113 @@
 }
 
 <h1>Inventario</h1>
-<br/>
-<br/>
+
+<br />
+<br />
 
 <table id="filterTable" class="display">
     <thead>
         <tr>
             <th>
                 <div class="filter-container">
-                    <i class="fas fa-filter" id="nombreFilterIcon"></i>
+                    <i class="fas fa-filter" id="fechaFilterIcon"></i>
                     <div class="filter-input">
-                        <input type="text" id="nombreFilter" placeholder="Filter by Nombre" style="display:none;" />
+                        <input type="text" id="fechaFilter" placeholder="Filtro por fecha" style="display:none;" />
                     </div>
                 </div>
             </th>
             <th>
                 <div class="filter-container">
-                    <i class="fas fa-filter" id="apellidoFilterIcon"></i>
+                    <i class="fas fa-filter" id="sucursalFilterIcon"></i>
                     <div class="filter-input">
-                        <input type="text" id="apellidoFilter" placeholder="Filter by Apellido" style="display:none;" />
+                        <input type="text" id="sucursalFilter" placeholder="Filtro por sucursal" style="display:none;" />
                     </div>
                 </div>
             </th>
             <th>
                 <div class="filter-container">
-                    <i class="fas fa-filter" id="generoFilterIcon"></i>
+                    <i class="fas fa-filter" id="productoFilterIcon"></i>
                     <div class="filter-input">
-                        <input type="text" id="generoFilter" placeholder="Filter by Genero" style="display:none;" />
+                        <input type="text" id="productoFilter" placeholder="Filtro por producto" style="display:none;" />
                     </div>
                 </div>
             </th>
-            @if (userInSpecificGroup)
-            {
-                <th></th>
-            }
+            <th>
+                <div class="filter-container">
+                    <i class="fas fa-filter" id="estadoFilterIcon"></i>
+                    <div class="filter-input">
+                        <select id="estadoFilter" style="display:none;">
+                            <option value="Aprobado">Aprobado</option>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="">Nulo</option>
+                        </select>
+                    </div>
+                </div>
+            </th>
         </tr>
     </thead>
 </table>
 
 <br />
 
+<div>
+    @if (groupClaims != null && groupClaims.Any())
+    {
+        <table class="table table-bordered table-striped" id="inventarioTable">
+            <thead>
+                <tr>
+                    <th>ID Orden</th>
+                    <th>Fecha</th>
+                    <th>ID Sucursal</th>
+                    <th>ID Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Descuento</th>
+                    <th>ID Tipo Operación</th>
+                    <th>ID Proveedor</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    @if (userInSpecificGroup)
+                    {
+                        <th>Edit</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.TnIdOrden</td>
+                        <td>@item.TfFecha</td>
+                        <td>@item.TnIdsucursalNavigation</td>
+                        <td>@item.TnIdProductoNavigation</td>
+                        <td>@item.TnCantidad</td>
+                        <td>@item.TnPrecio</td>
+                        <td>@item.TNDescuento</td>
+                        <td>@item.TnIdtipoOperacionNavigation</td>
+                        <td>@item.TnIdProveedorNavigation</td>
+                        <td>@item.TnTotal</td>
+                        <td>@item.TC_Estado</td>
+                        @if (userInSpecificGroup)
+                        {
+                            <td>
+                                <i class="fas fa-edit editIcon"></i>
+                                <i class="fas fa-save saveIcon" style="display:none;"></i>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No group claims found.</p>
+    }
+</div>
 
+@section Scripts {
+    <script src="~/js/inventario.js"></script>
+}
 
-
-<table id="myTable" class="display">
-    <thead>
-
-        <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Genero</th>
-            @if (userInSpecificGroup)
-            {
-                <th>Edit</th>
-            }
-        </tr>
-   
-    </thead>
-    <tbody>
-        <tr>
-            <td>Ricardo</td>
-            <td>Diaz</td>
-            <td>Hombre</td>
-            @if (userInSpecificGroup)
-            {
-                <td>
-                    <i class="fas fa-edit editIcon"></i>
-                    <i class="fas fa-save saveIcon" style="display:none;"></i>
-                    </td>
-                
-            }
-        </tr>
-        <tr>
-            <td>Mariela</td>
-            <td>Rivas</td>
-            <td>Mujer</td>
-            @if (userInSpecificGroup)
-            {
-                <td>
-                    <i class="fas fa-edit editIcon"></i>
-                    <i class="fas fa-save saveIcon" style="display:none;"></i>
-                </td>
-               
-            }
-        </tr>
-        <tr>
-            <td>Ana</td>
-            <td>Rivas</td>
-            <td>Mujer</td>
-            @if (userInSpecificGroup)
-            {
-                <td>
-                    <i class="fas fa-edit editIcon"></i>
-                    <i class="fas fa-save saveIcon" style="display:none;"></i>
-                    </td>        
-            }
-        </tr>
-    </tbody>
-</table>
-
-
-<link href="~/css/datatables.min.css" rel="stylesheet" />
-<link href="~/css/datatables.css" rel="stylesheet" />
-<script src="~/js/datatables.min.js"></script>
-<script src="~/js/datatables.js"></script>
-
-<script src="~/js/inventario.js"></script>
-
-
-<link href="~/css/inventariostyle.css" rel="stylesheet" />
-
-    @* <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
-            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-            <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-            <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> *@
+<link href="~/css/filterstyle.css" rel="stylesheet" />

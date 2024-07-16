@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-    // Initialize DataTable for the Inventario table
-    let table = new DataTable('#inventarioTable', {
+    // Initialize DataTable for the main table
+    let table = new DataTable('#sucursalesTable', {
         responsive: true,
         select: true,
         pageLength: 10,
@@ -8,45 +8,39 @@
         dom: 'lfrtip',
         order: [], // Prevent initial sorting
         columnDefs: [
-            { orderable: false, targets: [10] } // Disable sorting for the Edit column
+            { orderable: false, targets: [3] } // Disable sorting for the Edit column
         ],
         buttons: [], // Disable all buttons
+
     });
 
-    // Filter by Fecha
-    $('#fechaFilterIcon').on('click', function () {
-        $('#fechaFilter').toggle();
+    // Filter by Nombre
+    $('#nombreFilterIcon').on('click', function () {
+        $('#nombreFilter').toggle();
     });
-    $('#fechaFilter').on('keyup', function () {
+    $('#nombreFilter').on('keyup', function () {
         table.columns(1).search(this.value).draw();
     });
 
-    // Filter by Sucursal
-    $('#sucursalFilterIcon').on('click', function () {
-        $('#sucursalFilter').toggle();
+    // Filter by Provincia
+    $('#provinciaFilterIcon').on('click', function () {
+        $('#provinciaFilter').toggle();
     });
-    $('#sucursalFilter').on('keyup', function () {
+    $('#provinciaFilter').on('keyup', function () {
         table.columns(2).search(this.value).draw();
-    });
-
-    // Filter by Producto
-    $('#productoFilterIcon').on('click', function () {
-        $('#productoFilter').toggle();
-    });
-    $('#productoFilter').on('keyup', function () {
-        table.columns(3).search(this.value).draw();
     });
 
     // Filter by Estado
     $('#estadoFilterIcon').on('click', function () {
         $('#estadoFilter').toggle();
     });
-    $('#estadoFilter').on('change', function () {
-        table.columns(10).search(this.value).draw();
-    });
 
+    $('#estadoFilter').on('change', function () {
+        const filterValue = this.value;
+        table.columns(6).search(filterValue ? '^' + filterValue + '$' : '', true, false).draw();
+    });
     // Handle Edit icon click
-    $('#inventarioTable tbody').on('click', '.editIcon', function () {
+    $('#sucursalesTable tbody').on('click', '.editIcon', function () {
         let row = $(this).closest('tr');
         let data = table.row(row).data();
 
@@ -63,8 +57,14 @@
         row.find('.saveIcon').show();
     });
 
+
+
+
+
+
+
     // Handle Save icon click
-    $('#inventarioTable tbody').on('click', '.saveIcon', function () {
+    $('#sucursalesTable tbody').on('click', '.saveIcon', function () {
         let row = $(this).closest('tr');
         let newData = [];
 
