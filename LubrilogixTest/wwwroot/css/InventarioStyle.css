@@ -1,0 +1,27 @@
+﻿.filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the icon and input */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 4px; /* Optional: rounded corners */
+    padding: 5px; /* Add some padding */
+    margin-bottom: 5px; /* Space between each filter */
+    width: 350px; /* Set a fixed width */
+    height: 30px; /* Set a fixed height */
+}
+
+.filter-input {
+    margin-left: 5px; /* Space between icon and input */
+    display: inline-block; /* Keep it inline */
+}
+
+#filterTable th {
+    text-align: center; /* Center align the headers */
+}
+
+#filterTable input {
+    width: 80%; /* Adjust width as needed */
+    margin-top: 5px; /* Space above input */
+    display: none; /* Initially hidden */
+    height: 100%; /* Match the container height */
+}

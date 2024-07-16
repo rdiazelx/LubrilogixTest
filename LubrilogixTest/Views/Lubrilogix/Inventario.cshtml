@@ -3,34 +3,134 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/css/filtertable.css" rel="stylesheet" />
 
+
+@model List<LubrilogixTest.Models.Producto>
+
+@{
+    var specificGroupId = "724896d2-9e76-4f63-8129-1a22305cb5d5"; // IdGrupo LubrilogixAdmin
+    var groupClaims = ViewBag.GroupClaims as List<string>;
+    var userInSpecificGroup = groupClaims != null && groupClaims.Contains(specificGroupId);
+}
 
 <h1>Inventario</h1>
+<br/>
+<br/>
+
+<table id="filterTable" class="display">
+    <thead>
+        <tr>
+            <th>
+                <div class="filter-container">
+                    <i class="fas fa-filter" id="nombreFilterIcon"></i>
+                    <div class="filter-input">
+                        <input type="text" id="nombreFilter" placeholder="Filter by Nombre" style="display:none;" />
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="filter-container">
+                    <i class="fas fa-filter" id="apellidoFilterIcon"></i>
+                    <div class="filter-input">
+                        <input type="text" id="apellidoFilter" placeholder="Filter by Apellido" style="display:none;" />
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="filter-container">
+                    <i class="fas fa-filter" id="generoFilterIcon"></i>
+                    <div class="filter-input">
+                        <input type="text" id="generoFilter" placeholder="Filter by Genero" style="display:none;" />
+                    </div>
+                </div>
+            </th>
+            @if (userInSpecificGroup)
+            {
+                <th></th>
+            }
+        </tr>
+    </thead>
+</table>
+
+<br />
+
+
+
 
 <table id="myTable" class="display">
     <thead>
+
         <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Genero</th>
+            @if (userInSpecificGroup)
+            {
+                <th>Edit</th>
+            }
         </tr>
+   
     </thead>
     <tbody>
         <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
+            <td>Ricardo</td>
+            <td>Diaz</td>
+            <td>Hombre</td>
+            @if (userInSpecificGroup)
+            {
+                <td>
+                    <i class="fas fa-edit editIcon"></i>
+                    <i class="fas fa-save saveIcon" style="display:none;"></i>
+                    </td>
+                
+            }
         </tr>
         <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
+            <td>Mariela</td>
+            <td>Rivas</td>
+            <td>Mujer</td>
+            @if (userInSpecificGroup)
+            {
+                <td>
+                    <i class="fas fa-edit editIcon"></i>
+                    <i class="fas fa-save saveIcon" style="display:none;"></i>
+                </td>
+               
+            }
+        </tr>
+        <tr>
+            <td>Ana</td>
+            <td>Rivas</td>
+            <td>Mujer</td>
+            @if (userInSpecificGroup)
+            {
+                <td>
+                    <i class="fas fa-edit editIcon"></i>
+                    <i class="fas fa-save saveIcon" style="display:none;"></i>
+                    </td>        
+            }
         </tr>
     </tbody>
 </table>
 
-<!-- Include jQuery, then DataTables CSS and JS files -->
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
 
-
+<link href="~/css/datatables.min.css" rel="stylesheet" />
+<link href="~/css/datatables.css" rel="stylesheet" />
+<script src="~/js/datatables.min.js"></script>
+<script src="~/js/datatables.js"></script>
 
 <script src="~/js/inventario.js"></script>
+
+
+<link href="~/css/inventariostyle.css" rel="stylesheet" />
+
+    @* <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+            <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> *@
