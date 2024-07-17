@@ -1,14 +1,14 @@
 ﻿using LubrilogixTest.Models;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Graph.SecurityNamespace;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication;
 
 
 namespace WebApp_OpenIDConnect_DotNet.Controllers
@@ -59,16 +59,6 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Inventario()
-        {
-            ViewBag.GroupClaims = await GetGroupClaimsAsync();
-
-            var inventario = await _context.GetInventarioAsync();
-
-            return View(inventario);
-
-        }
-
         public async Task<IActionResult> Proveedores()
         {
             ViewBag.GroupClaims = await GetGroupClaimsAsync();
@@ -109,8 +99,37 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
             return View(sucursales);
         }
 
+        public async Task<IActionResult> Inventario()
+        {
+            ViewBag.GroupClaims = await GetGroupClaimsAsync();
 
+            var inventario = await _context.spLeerInventario();
 
+            return View(inventario);
+        }
+
+        public async Task<IActionResult> TotalInventory()
+        {
+            ViewBag.GroupClaims = await GetGroupClaimsAsync();
+
+            var inventario = await _context.spLeerInventario();
+
+            // Filter and calculate the total inventory
+            var totalInventory = inventario
+                .Where(i => i.TC_Estado == "Aprobado")
+                .GroupBy(i => i.TN_IdProducto)
+                .Select(g => new
+                {
+                    ProductoNombre = g.FirstOrDefault().ProductoNombre,
+                    TotalCantidad = g.Sum(i => i.TN_IDTipoOperacion == 1 ? i.TN_Cantidad: 0) -  // Compras
+                                    g.Sum(i => i.TN_IDTipoOperacion == 2 ? i.TN_Cantidad : 0) +  // Ventas
+                                    g.Sum(i => i.TN_IDTipoOperacion == 3 ? i.TN_Cantidad : 0) +  // Devoluciones
+                                    g.Sum(i => i.TN_IDTipoOperacion == 4 ? i.TN_Cantidad : 0)      // Ajustes
+                })
+                .ToList();
+
+            return View(totalInventory);
+        }
 
 
 

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "TotalInventory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Inventario disponible</h1>
+
+@model IEnumerable<dynamic>
+
+<h2>Inventario Total</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductoNombre</td>
+                <td>@item.TotalCantidad</td>
+            </tr>
+        }
+    </tbody>
+</table>

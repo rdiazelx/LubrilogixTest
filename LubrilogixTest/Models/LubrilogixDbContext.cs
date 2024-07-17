@@ -32,9 +32,6 @@ public partial class LubrilogixDbContext : DbContext
 
     public virtual DbSet<Sucursale> Sucursales { get; set; }
 
-
-
-
     private readonly IConfiguration _configuration;
 
     public LubrilogixDbContext(IConfiguration configuration)
@@ -192,9 +189,33 @@ public partial class LubrilogixDbContext : DbContext
                 .HasColumnName("TC_Telefono");
         });
 
+        // Add the configuration for spLeerInventario_Result
+        modelBuilder.Entity<spLeerInventario_Result>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView(null); // Specify that this is not a table or view
+            entity.Property(e => e.TN_IdOrden).HasColumnName("TN_IdOrden");
+            entity.Property(e => e.TF_Fecha).HasColumnName("TF_Fecha");
+            entity.Property(e => e.TN_IDSucursal).HasColumnName("TN_IDSucursal");
+            entity.Property(e => e.SucursalNombre).HasColumnName("SucursalNombre");
+            entity.Property(e => e.TN_IdProducto).HasColumnName("TN_IdProducto");
+            entity.Property(e => e.ProductoNombre).HasColumnName("ProductoNombre");
+            entity.Property(e => e.TN_Precio).HasColumnName("TN_Precio");
+            entity.Property(e => e.TN_Descuento).HasColumnName("T_N_Descuento");
+            entity.Property(e => e.TN_IDTipoOperacion).HasColumnName("TN_IDTipoOperacion");
+            entity.Property(e => e.TipoOperacionNombre).HasColumnName("TipoOperacionNombre");
+            entity.Property(e => e.TN_IdProveedor).HasColumnName("TN_IdProveedor");
+            entity.Property(e => e.ProveedorNombre).HasColumnName("ProveedorNombre");
+            entity.Property(e => e.TN_Total).HasColumnName("TN_Total");
+            entity.Property(e => e.TC_Estado).HasColumnName("TC_Estado");
+        });
+
+
         OnModelCreatingPartial(modelBuilder);
     }
      partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+
     #endregion Model Builder
 
 
@@ -311,7 +332,7 @@ public partial class LubrilogixDbContext : DbContext
 
     #region Read data Inventario
 
-    public async Task<List<Inventario>> GetInventarioAsync()
+    public async Task<List<spLeerInventario_Result>> spLeerInventario()
     {
         var codErrorParam = new SqlParameter("@cod_error", SqlDbType.Int)
         {
@@ -323,12 +344,11 @@ public partial class LubrilogixDbContext : DbContext
             Direction = ParameterDirection.Output
         };
 
-        var inventario = await Inventarios
+        var result = await this.Set<spLeerInventario_Result>()
             .FromSqlRaw("EXEC spLeerInventario @cod_error = @cod_error OUTPUT, @msg_error = @msg_error OUTPUT",
                 codErrorParam, msgErrorParam)
             .ToListAsync();
 
-        // Handle error codes if necessary
         int codError = (int)codErrorParam.Value;
         string msgError = (string)msgErrorParam.Value;
 
@@ -337,7 +357,7 @@ public partial class LubrilogixDbContext : DbContext
             throw new Exception(msgError);
         }
 
-        return inventario;
+        return result;
     }
 
 

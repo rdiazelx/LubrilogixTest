@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
     // Initialize DataTable for the Inventario table
     let table = new DataTable('#inventarioTable', {
-        responsive: true,
         select: true,
+        responsive: true,
         pageLength: 10,
         lengthMenu: [10, 25, 50, 100],
         dom: 'lfrtip',
@@ -10,7 +10,20 @@
         columnDefs: [
             { orderable: false, targets: [10] } // Disable sorting for the Edit column
         ],
-        buttons: [], // Disable all buttons
+        buttons: [
+            {
+                extend: 'csvHtml5',
+                text: 'Export CSV',
+                className: 'btn btn-primary',
+                title: 'Inventario Data' // Optional: Set the title for the CSV file
+            },
+            {
+                extend: 'excelHtml5',
+                text: 'Export Excel',
+                className: 'btn btn-primary',
+                title: 'Inventario Data' // Optional: Set the title for the Excel file
+            }
+        ],
     });
 
     // Filter by Fecha

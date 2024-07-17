@@ -1,4 +1,12 @@
-﻿/* Provide sufficient contrast against white background */
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+/* Provide sufficient contrast against white background */
 a {
     color: #0366d6;
 }
@@ -19,6 +27,7 @@ a {
 html, body {
     height: 100%;
     margin: 0;
+    padding: 0; /* Ensure no padding */
     display: flex;
     flex-direction: column;
 }
@@ -27,38 +36,83 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #e0e0e0;
+    background-color:aqua !important;
 }
+
+
+.container {
+    display: flex;
+    justify-content: center; /* Center child elements */
+    align-items: stretch; /* Ensure children take full height */
+    width: 100%;
+}
+
+
 
 main {
-    flex: 1;
+    width: calc(100% - 15rem); /* Base width adjustment */
+    max-width: 1200px; /* Optional: set a max width */
+    margin: 0 auto; /* Center horizontally */
+    padding: 1.5rem;
+    background-color: navajowhite;
+    transition: width 0.3s; /* Smooth transition */
+    position: relative; /* Ensure it positions correctly */
 }
 
-.container-login {
-    width: 15%;
-    height: 100%; /* Full viewport height */
+
+@media (max-width: 768px) {
+    main {
+        width: 100%; /* Full width on small screens */
+        margin-left: 0; /* No left margin */
+        padding: 1rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    main {
+        width: calc(100% - 10rem); /* Adjust width */
+        margin-left: 0; /* No left margin */
+        padding: 1.5rem;
+    }
+}
+
+@media (min-width: 1025px) {
+    main {
+        width: calc(100% - 15rem); /* Maintain width */
+        margin-left: 0%; /* Keep left margin */
+        padding: 2rem;
+    }
+}
+
+
+
+
+/* Container Styles */
+.container-login,
+.container-menu {
+    width: 15rem; /* Adjusting to rem */
+    height: 100%;
     display: flex;
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    background-color: darkred;
-    position: fixed; /* or absolute depending on your layout */
-    right: 0; /* Position to the left */
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    position: fixed;
+    right: 0;
+    top: 0; /* Ensure it starts from the top */
+    margin: 0;
+    padding: 0;
 }
 
 .container-menu {
-    width: 15%;
-    height: 200%; /* Full viewport height */
-    display: flex;
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
+    left: 0;
+    height: 200%; /* Consider adjusting this for smaller screens */
     background-color: forestgreen;
-    position: fixed; /* or absolute depending on your layout */
-    left: 0; /* Position to the left */
 }
 
+/* Sidebar Styles */
 .sidebar {
     height: 100vh;
-    width: 12%;
+    width: 12rem; /* Using rem */
     position: fixed;
     top: 0;
     left: 0;
@@ -71,9 +125,10 @@ main {
 }
 
     .sidebar.collapsed {
-        width: 70px; /* Adjust this value as needed */
+        width: 4.375rem; /* 70px in rem */
     }
 
+/* Navbar Styles */
 .navbar-nav-menu {
     display: flex;
     flex-direction: column;
@@ -94,9 +149,59 @@ main {
     color: white; /* Change text color to white */
     font-weight: bold; /* Make text bold */
     text-decoration: none;
-    padding: 1rem;
+    padding: 1rem; /* Using rem */
     white-space: nowrap;
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container-login,
+    .container-menu {
+        width: 12rem; /* Smaller width for smaller screens */
+    }
+
+    .sidebar {
+        width: 10rem; /* Adjust width for smaller screens */
+    }
+
+    main {
+        width: 100%;
+        padding: 1rem; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container-login,
+    .container-menu {
+        width: 14rem; /* Adjust width */
+    }
+
+    .sidebar {
+        width: 11rem; /* Adjust width */
+    }
+
+    main {
+        width: calc(100% - 15rem);
+        padding: 1.5rem;
+    }
+}
+
+@media (min-width: 1025px) {
+    .container-login,
+    .container-menu {
+        width: 15rem; /* Default width */
+    }
+
+    .sidebar {
+        width: 12rem; /* Default width */
+    }
+
+    main {
+        width: calc(100% - 15rem);
+        padding: 2rem;
+    }
+}
+
 
     .nav-link-menu:hover {
         background-color: #1b6ec2; /* Add hover effect */

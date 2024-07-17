@@ -33,14 +33,36 @@
     }
 .welcome-message-container {
     width: 100%;
-    height: 10%; /* Full viewport height */
+    height: 10vh; /* Use vh for height */
     display: flex;
-    background-color: none;
+    background-color: transparent; /* Use transparent instead of none */
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
-    position: absolute; /* or absolute depending on your layout */
-    right: 0; /* Position to the left */
-    top: 10%
+    position: absolute;
+    right: 0;
+    top: 1rem; /* Using rem for top positioning */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .welcome-message-container {
+        height: 10vh; /* Adjust height for smaller screens */
+        top: 0.5rem; /* Adjust top position */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .welcome-message-container {
+        height: 12vh; /* Adjust height */
+        top: 1rem; /* Maintain position */
+    }
+}
+
+@media (min-width: 1025px) {
+    .welcome-message-container {
+        height: 15vh; /* Default height */
+        top: 1rem; /* Maintain position */
+    }
 }
 
 .box-name {

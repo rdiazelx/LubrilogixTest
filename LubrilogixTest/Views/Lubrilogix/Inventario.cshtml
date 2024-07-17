@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model List<LubrilogixTest.Models.Inventario>
+@model List<LubrilogixTest.Models.spLeerInventario_Result>
 
 @{
     var specificGroupId = "724896d2-9e76-4f63-8129-1a22305cb5d5"; // IdGrupo LubrilogixAdmin
@@ -70,14 +70,18 @@
                     <th>ID Orden</th>
                     <th>Fecha</th>
                     <th>ID Sucursal</th>
+                    <th>Nombre Sucursal</th>
                     <th>ID Producto</th>
-                    <th>Cantidad</th>
+                    <th>Nombre Producto</th>
                     <th>Precio</th>
                     <th>Descuento</th>
                     <th>ID Tipo Operación</th>
+                    <th>Nombre Tipo Operación</th>
                     <th>ID Proveedor</th>
+                    <th>Nombre Proveedor</th>
                     <th>Total</th>
                     <th>Estado</th>
+                    <th>Cantidad</th>
                     @if (userInSpecificGroup)
                     {
                         <th>Edit</th>
@@ -88,17 +92,21 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.TnIdOrden</td>
-                        <td>@item.TfFecha</td>
-                        <td>@item.TnIdsucursalNavigation</td>
-                        <td>@item.TnIdProductoNavigation</td>
-                        <td>@item.TnCantidad</td>
-                        <td>@item.TnPrecio</td>
-                        <td>@item.TNDescuento</td>
-                        <td>@item.TnIdtipoOperacionNavigation</td>
-                        <td>@item.TnIdProveedorNavigation</td>
-                        <td>@item.TnTotal</td>
+                        <td>@item.TN_IdOrden</td>
+                        <td>@item.TF_Fecha.ToString("yyyy-MM-dd")</td>
+                        <td>@item.TN_IDSucursal</td>
+                        <td>@item.SucursalNombre</td>
+                        <td>@item.TN_IdProducto</td>
+                        <td>@item.ProductoNombre</td>
+                        <td>@item.TN_Precio</td>
+                        <td>@item.TN_Descuento</td>
+                        <td>@item.TN_IDTipoOperacion</td>
+                        <td>@item.TipoOperacionNombre</td>
+                        <td>@item.TN_IdProveedor</td>
+                        <td>@item.ProveedorNombre</td>
+                        <td>@item.TN_Total</td>
                         <td>@item.TC_Estado</td>
+                        <td>@item.TN_Cantidad</td>
                         @if (userInSpecificGroup)
                         {
                             <td>
@@ -122,3 +130,10 @@
 }
 
 <link href="~/css/filterstyle.css" rel="stylesheet" />
+<!-- Include DataTables and Buttons CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+
+<!-- Include DataTables and Buttons JS -->
+<script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>

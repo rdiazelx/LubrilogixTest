@@ -10,11 +10,18 @@
         border-radius: 10px;
     }
 
+.dataTables_wrapper {
+    margin: 0 auto; /* Center the DataTable */
+    max-width: 100%; /* Ensure full width */
+    padding: 20px; /* Add padding if needed */
+}
 
 .table {
-    border-collapse: collapse;
-    width: 100%;
+    width: 100%; /* Ensure table takes full width */
+    margin: 0; /* Remove any unwanted margin */
 }
+
+
 
     .table th, .table td {
         text-align: center;
