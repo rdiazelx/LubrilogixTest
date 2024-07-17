@@ -50,12 +50,15 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
 
             return new List<string>(); // Return an empty list or handle accordingly if user is not authenticated
         }
-
-    
-
-
         public IActionResult Inicio()
         {
+            return View();
+        }
+
+        public async Task<IActionResult> vistaInventario()
+        {
+            ViewBag.GroupClaims = await GetGroupClaimsAsync();
+
             return View();
         }
 
@@ -79,7 +82,6 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
             return View(proveedores);
         }
 
-
         public async Task<IActionResult> Productos()
         {
             ViewBag.GroupClaims = await GetGroupClaimsAsync();
@@ -89,7 +91,6 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
             var productos = await _context.GetProductosAsync();
             return View(productos);
         }
-
 
         public async Task<IActionResult> Sucursales()
         {
@@ -129,6 +130,29 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
                 .ToList();
 
             return View(totalInventory);
+        }
+
+
+        public async Task<IActionResult> inventarioPendiente()
+        {
+            ViewBag.GroupClaims = await GetGroupClaimsAsync();
+
+            var inventario = await _context.spLeerInventario();
+
+            // Filter the inventory for "pendiente" status
+            var pendingInventory = inventario
+                .Where(i => i.TC_Estado == "Pendiente")
+                .Select(i => new
+                {
+                    i.TN_IdOrden,
+                    i.TF_Fecha,
+                    i.SucursalNombre,
+                    i.ProductoNombre,
+                    i.TN_Cantidad
+                })
+                .ToList();
+
+            return View(pendingInventory);
         }
 
 

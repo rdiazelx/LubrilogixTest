@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "inventarioPendiente";
+
+}
+
+
+@model IEnumerable<dynamic>
+
+
+@{
+    var specificGroupId = "724896d2-9e76-4f63-8129-1a22305cb5d5"; // IdGrupo LubrilogixAdmin
+    var groupClaims = ViewBag.GroupClaims as List<string>;
+    var userInSpecificGroup = groupClaims != null && groupClaims.Contains(specificGroupId);
+}
+
+<h2>Ordenes de compra pendientes</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered table-striped" id="inventarioPendienteTable">
+        <thead>
+            <tr>
+                <th>ID Orden</th>
+                <th>Fecha</th>
+                <th>Nombre Sucursal</th>
+                <th>Nombre Producto</th>
+                <th>Cantidad</th>
+                <th>aprobar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.TN_IdOrden</td>
+                    <td>@item.TF_Fecha.ToString("yyyy-MM-dd")</td>
+                    <td>@item.SucursalNombre</td>
+                    <td>@item.ProductoNombre</td>
+                    <td>@item.TN_Cantidad</td>
+                    @if (userInSpecificGroup)
+                    {
+                        <td>
+                            <i class="fas fa-save saveIcon" style="display:none;"></i>
+                            <i class="fas fa-check approveIcon" onclick="aprobarOrden('@item.TN_IdOrden')" style="cursor:pointer;"></i>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No pending inventory found.</p>
+}
+
+@section Scripts {
+    <script src="~/js/aprobarOrden.js"></script>
+
+}
