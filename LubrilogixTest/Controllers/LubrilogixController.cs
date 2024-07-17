@@ -155,6 +155,27 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
             return View(pendingInventory);
         }
 
+        public async Task<IActionResult> Prueba()
+        {
+            ViewBag.GroupClaims = await GetGroupClaimsAsync();
+
+            var inventario = await _context.spLeerInventario();
+
+            // Filter the inventory for "pendiente" status
+            var pendingInventory = inventario
+                .Where(i => i.TC_Estado == "Pendiente")
+                .Select(i => new
+                {
+                    i.TN_IdOrden,
+                    i.TF_Fecha,
+                    i.SucursalNombre,
+                    i.ProductoNombre,
+                    i.TN_Cantidad
+                })
+                .ToList();
+
+            return View(pendingInventory);
+        }
 
 
     }

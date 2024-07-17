@@ -16,6 +16,9 @@
                 case 'option3':
                     url = '/Lubrilogix/inventarioPendiente';
                     break;
+                case 'option4':
+                    url = '/Lubrilogix/Prueba';
+                    break;
                 default:
                     viewContainer.innerHTML = '';
                     return;
