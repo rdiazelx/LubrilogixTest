@@ -178,5 +178,31 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
         }
 
 
+        public async Task<IActionResult> UpdateOrderState(int tnIdOrden)
+        {
+            if (tnIdOrden <= 0)
+            {
+                return BadRequest("Invalid order ID.");
+            }
+
+            try
+            {
+                await _context.UpdateEstadoAsync(tnIdOrden);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                _logger.LogError(ex, "Error updating order state for TN_IdOrden: {TN_IdOrden}", tnIdOrden);
+
+                // Return a detailed error response
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+
+
+
     }
-}
+    }

@@ -364,7 +364,25 @@ public partial class LubrilogixDbContext : DbContext
 
     #endregion
 
+    #region
+    public async Task UpdateEstadoAsync(int tnIdOrden)
+    {
+        var tnIdOrdenParam = new SqlParameter("@TN_IdOrden", tnIdOrden);
 
+        try
+        {
+            await Database.ExecuteSqlRawAsync(
+                "EXEC dbo.spActualizarEstadoOrden @TN_IdOrden",
+                tnIdOrdenParam
+            );
+        }
+        catch (Exception ex)
+        {
+            // Log the exception or handle it as needed
+            throw new Exception($"Error updating order state: {ex.Message}", ex);
+        }
+    }
+    #endregion
 
     #endregion Read
 

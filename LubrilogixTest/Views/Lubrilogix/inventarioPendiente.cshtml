@@ -40,6 +40,7 @@
                     @if (userInSpecificGroup)
                     {
                         <td>
+
                             <i class="fas fa-save saveIcon" style="display:none;"></i>
                             <i class="fas fa-check approveIcon" onclick="aprobarOrden('@item.TN_IdOrden')" style="cursor:pointer;"></i>
                         </td>
@@ -51,7 +52,7 @@
 }
 else
 {
-    <p>No pending inventory found.</p>
+    <p>No hay ordenes pendientes.</p>
 }
 
 @section Scripts {
