@@ -4,7 +4,7 @@
 }
 
 @model List<LubrilogixTest.Models.spLeerInventario_Result>
-
+<link href="~/css/inventariofilter.css" rel="stylesheet" />
 @{
     var specificGroupId = "724896d2-9e76-4f63-8129-1a22305cb5d5"; // IdGrupo LubrilogixAdmin
     var groupClaims = ViewBag.GroupClaims as List<string>;
@@ -16,11 +16,12 @@
 <br />
 <br />
 
-<table id="filterTable" class="display">
+
+<table id="inventarioFilterTable" class="display">
     <thead>
         <tr>
             <th>
-                <div class="filter-container">
+                <div class="inventario-filter-container">
                     <i class="fas fa-filter" id="idOrdenFilterIcon"></i>
                     <div class="filter-input">
                         <input type="text" id="idOrdenFilter" placeholder="Filtro por ID Orden" style="display:block;" />
@@ -28,7 +29,7 @@
                 </div>
             </th>
             <th>
-                <div class="filter-container">
+                <div class="inventario-filter-container">
                     <i class="fas fa-filter" id="fechaFilterIcon"></i>
                     <div class="filter-input">
                         <input type="text" id="fechaFilter" placeholder="Filtro por fecha" style="display:block;" />
@@ -36,7 +37,7 @@
                 </div>
             </th>
             <th>
-                <div class="filter-container">
+                <div class="inventario-filter-container">
                     <i class="fas fa-filter" id="sucursalFilterIcon"></i>
                     <div class="filter-input">
                         <input type="text" id="sucursalFilter" placeholder="Filtro por sucursal" style="display:block;" />
@@ -44,15 +45,15 @@
                 </div>
             </th>
             <th>
-                <div class="filter-container">
+                <div class="inventario-filter-container">
                     <i class="fas fa-filter" id="productoFilterIcon"></i>
                     <div class="filter-input">
-                        <input type="text" id="productoFilter" placeholder="Filtro por producto" style="display:block;" />
+                        <input type="text" id="productoFilter" placeholder="Filtro por id producto" style="display:block;" />
                     </div>
                 </div>
             </th>
             <th>
-                <div class="filter-container">
+                <div class="inventario-filter-container">
                     <i class="fas fa-filter" id="nombreProductoFilterIcon"></i>
                     <div class="filter-input">
                         <input type="text" id="nombreProductoFilter" placeholder="Filtro por nombre producto" style="display:block;" />
@@ -60,7 +61,7 @@
                 </div>
             </th>
             <th>
-                <div class="filter-container">
+                <div class="inventario-filter-container">
                     <i class="fas fa-filter" id="tipoOperacionFilterIcon"></i>
                     <div class="filter-input">
                         <select id="tipoOperacionFilter" style="display:block;">
@@ -74,7 +75,7 @@
                 </div>
             </th>
             <th>
-                <div class="filter-container">
+                <div class="inventario-filter-container">
                     <i class="fas fa-filter" id="proveedorFilterIcon"></i>
                     <div class="filter-input">
                         <input type="text" id="proveedorFilter" placeholder="Filtro por proveedor" style="display:block;" />
@@ -82,14 +83,13 @@
                 </div>
             </th>
             <th>
-                <div class="filter-container">
+                <div class="inventario-filter-container">
                     <i class="fas fa-filter" id="estadoFilterIcon"></i>
                     <div class="filter-input">
                         <select id="estadoFilter" style="display:block;">
                             <option value="">-- Seleccione Estado --</option>
                             <option value="Aprobado">Aprobado</option>
                             <option value="Pendiente">Pendiente</option>
-                            <option value="">Nulo</option>
                         </select>
                     </div>
                 </div>
@@ -106,21 +106,21 @@
         <table class="table table-bordered table-striped" id="inventarioTable">
             <thead>
                 <tr>
-                    <th>ID Orden</th>
-                    <th>Fecha</th>
-                    <th>ID Sucursal</th>
-                    <th>Nombre Sucursal</th>
-                    <th>ID Producto</th>
-                    <th>Nombre Producto</th>
-                    <th>Precio</th>
-                    <th>Descuento</th>
-                    <th>ID Tipo Operación</th>
-                    <th>Nombre Tipo Operación</th>
-                    <th>ID Proveedor</th>
-                    <th>Nombre Proveedor</th>
-                    <th>Total</th>
-                    <th>Estado</th>
-                    <th>Cantidad</th>
+         @* 0 *@    <th>ID Orden</th>
+         @* 1 *@    <th>Fecha</th>
+         @* 2 *@    <th>ID Sucursal</th>
+         @* 3 *@    <th>Nombre Sucursal</th>
+         @* 4 *@    <th>ID Producto</th>
+         @* 5 *@    <th>Nombre Producto</th>
+         @* 6 *@    <th>Precio</th>
+         @* 7 *@    <th>Descuento</th>
+         @* 8 *@    <th>ID Tipo Operación</th>
+         @* 9 *@    <th>Nombre Tipo Operación</th>
+         @* 10*@    <th>ID Proveedor</th>
+         @* 11*@    <th>Nombre Proveedor</th>
+         @* 12*@    <th>Total</th>
+         @* 13*@    <th>Estado</th>
+         @* 14*@    <th>Cantidad</th>
                     @if (userInSpecificGroup)
                     {
                         <th>Edit</th>

@@ -47,7 +47,7 @@
         $('#sucursalFilter').toggle();
     });
     $('#sucursalFilter').on('keyup', function () {
-        table.column(2).search(this.value).draw();
+        table.column(3).search(this.value).draw();
     });
 
     // Filter by IdProducto
@@ -71,7 +71,7 @@
         $('#tipoOperacionFilter').toggle();
     });
     $('#tipoOperacionFilter').on('change', function () {
-        table.column(8).search(this.value).draw();
+        table.column(9).search(this.value).draw();
     });
 
     // Filter by Nombre Proveedor

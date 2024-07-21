@@ -1,0 +1,67 @@
+﻿/* Unique CSS for Inventario filters */
+
+/* Container for each filter in Inventario */
+.inventario-filter-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd; /* Light border for a clean look */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px 10px; /* Add padding for spacing */
+    margin-bottom: 10px; /* Space between filters */
+    width: 100%; /* Full width of the table cell */
+    max-width: 200px; /* Max width for filter containers */
+}
+
+    /* Icon styling for Inventario filters */
+    .inventario-filter-container i {
+        margin-right: 10px; /* Space between icon and input */
+        color: #555; /* Icon color */
+    }
+
+    /* Input and select styling for Inventario filters */
+    .inventario-filter-container input,
+    .inventario-filter-container select {
+        width: 100%; /* Full width to fit the container */
+        padding: 5px; /* Padding inside input */
+        border: 1px solid #ccc; /* Border for input fields */
+        border-radius: 4px; /* Rounded corners for inputs */
+        font-size: 14px; /* Font size for readability */
+        color: #333; /* Text color */
+        background-color: #f9f9f9; /* Light background for contrast */
+    }
+
+        /* Placeholder text styling */
+        .inventario-filter-container input::placeholder,
+        .inventario-filter-container select option {
+            color: #888; /* Lighter color for placeholder text */
+        }
+
+/* Table header styling for Inventario filters */
+#inventarioFilterTable th {
+    text-align: center; /* Center-align headers */
+    padding: 10px; /* Add padding to header cells */
+}
+
+/* Hide inputs initially */
+#inventarioFilterTable input,
+#inventarioFilterTable select {
+    display: none; /* Hide inputs by default */
+}
+
+/* Display filters on table */
+#inventarioFilterTable {
+    margin-bottom: 20px; /* Space below the filter table */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .inventario-filter-container {
+        flex-direction: column; /* Stack icon and input vertically on small screens */
+        max-width: 100%; /* Allow full width on small screens */
+    }
+
+        .inventario-filter-container i {
+            margin-right: 0; /* Remove margin on small screens */
+            margin-bottom: 5px; /* Add space below icon */
+        }
+}
