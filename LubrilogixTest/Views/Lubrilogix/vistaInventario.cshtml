@@ -15,24 +15,70 @@
 
 <br />
 
-<div>
+@if (userInSpecificGroup)
+{
+    <div>
+        @* El botón para abrir el modal *@
+        <button id="openModalBtn" class="btn">Agregar Producto</button>
+    </div>
+}
+
+
     <label for="viewSelector">Seleccione una vista:</label>
+
 
     <select id="viewSelector" class="form-control">
 
         <option value="">-- Seleccione una opcion --</option>
         <option value="option1">Inventario Total</option>
-        <option value="option2">Historial</option>
+        <option value="option2">Todos los datos</option>
         <option value="option3">Ordenes de compra pendientes</option>
-       @*  <option value="option4">Prueba</option> *@
+        <option value="option4">Prueba</option>
     </select>
     <div id="viewContainer"></div>
 </div>
+
 <br />
+<div>
+    @* El cuerpo del modal *@
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Agregar producto</h1> @* El titulo del modal *@
+            </div>
+            <div class="modal-body">
+                @* El formulario que va dentro el modal *@
+                <form id="addProductForm">
+                    <div class="form-group">
+                        @* @* Espacio para agregar el nombre del producto *@
+                        <label for="productoNombre">Nombre del Producto</label>
+                        <input type="text" id="productoNombre" placeholder="Ingrese el nombre del producto" required>
+                    </div>
+                    <div class="form-group">
+                        @* Espacio para agregar la categoria del prodcuto *@
+                        <label for="productoCategoria">Categoria </label>
+                        <input type="text" id="productoCategoria" placeholder="Ingrese la categoria del producto" required>
+                    </div>
+                    <div class="form-group">
+                        @* Espacio para la subcategoria del producto *@
+                        <label for="productoSub">Subcategoria</label>
+                        <input type="text" id="productoSub" placeholder="Ingrese el subcategoria del producto" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="closeModalBtn">Cerrar</button> @* El boton para cerrar *@
+                <button class="btn" id="saveProductButton">Agregar producto</button>  @* El boton para agregar el producto *@
+            </div>
+        </div>
+    </div>
 
 @section Scripts {
-    <script src="~/js/aprobarOrden.js"></script>
+
     <script src="~/js/menuinventarios.js"></script>
-   
+    <script src="~/js/aprobarOrden.js"></script>
+
+    <link href="~/css/modalstyles.css" rel="stylesheet" />
+    <script src="~/js/modal.js"></script>  @* El link en JS *@
 }
 

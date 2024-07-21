@@ -29,6 +29,7 @@
     <PackageReference Include="Microsoft.Identity.Web.TokenAcquisition" Version="2.20.0" />
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="2.20.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

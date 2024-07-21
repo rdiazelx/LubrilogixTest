@@ -1,7 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Productos";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@using Newtonsoft.Json
+
+
 @model List<LubrilogixTest.Models.Producto>
 <script src="~/js/productos.js"></script>
 @{
@@ -42,59 +41,56 @@
                     </div>
                 </div>
             </th>
-         </tr>
+        </tr>
     </thead>
 </table>
 
 <br />
 
-
-    <div>
-        @if (groupClaims != null && groupClaims.Any())
-        {
+<div>
+    @if (groupClaims != null && groupClaims.Any())
+    {
         <table class="table table-bordered table-striped" id="productosTable">
-                <thead>
+            <thead>
+                <tr>
+                    <th>ID Producto</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Subcategoría</th>
+                    <th class="editColumn" style="display:none;">Editar</th> <!-- Placeholder column -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producto in Model)
+                {
                     <tr>
-                        <th>ID Producto</th>
-                        <th>Nombre</th>
-                        <th>Categoría</th>
-                        <th>Subcategoría</th>
-                        @if (userInSpecificGroup)
-                        {
-                            <th>Edit</th>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var producto in Model)
-                    {
-                        <tr>
-                            <td>@producto.TnIdProducto</td>
-                            <td>@producto.TcNombre</td>
-                            <td>@producto.TcCategoria</td>
-                            <td>@producto.TcSubcategoria</td>
+                        <td>@producto.TnIdProducto</td>
+                        <td>@producto.TcNombre</td>
+                        <td>@producto.TcCategoria</td>
+                        <td>@producto.TcSubcategoria</td>
+                        <td class="editColumn" style="display:none;">
                             @if (userInSpecificGroup)
                             {
-                                <td>
-                                    <i class="fas fa-edit editIcon"></i>
-                                    <i class="fas fa-save saveIcon" style="display:none;"></i>
-                                </td>
+                                <i class="fas fa-edit editIcon"></i>
+                                <i class="fas fa-save saveIcon" style="display:none;"></i>
                             }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <p>No group claims found.</p>
-        }
-    </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No group claims found.</p>
+    }
+</div>
 
+<script>
+    // Pass the Razor variable to a JavaScript variable
+    var userInSpecificGroup = @Html.Raw(JsonConvert.SerializeObject(userInSpecificGroup));
+</script>
 
 @section Scripts {
     <script src="~/js/productos.js"></script>
 }
-
-
-

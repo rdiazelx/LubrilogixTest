@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     // Initialize DataTable for the main table
-    let table = new DataTable('#productosTable', {
+    let table = $('#productosTable').DataTable({
         responsive: true,
         select: true,
         pageLength: 10,
@@ -11,31 +11,38 @@
             { orderable: false, targets: [4] } // Disable sorting for the Edit column
         ],
         buttons: [], // Disable all buttons
-       /* searching: false,*/
     });
+
+    // Show or hide the Edit column based on the userInSpecificGroup value
+    if (userInSpecificGroup) {
+        table.column(4).visible(true); // Show the Edit column
+        $('.editColumn').show(); // Make sure the placeholder column is shown
+    } else {
+        table.column(4).visible(false); // Hide the Edit column
+    }
 
     // Filter by Nombre
     $('#nombreFilterIcon').on('click', function () {
         $('#nombreFilter').toggle();
     });
     $('#nombreFilter').on('keyup', function () {
-        table.columns(1).search(this.value).draw();
+        table.column(1).search(this.value).draw();
     });
 
-    // Filter by Categogira
+    // Filter by Categoría
     $('#categoriaFilterIcon').on('click', function () {
         $('#categoriaFilter').toggle();
     });
     $('#categoriaFilter').on('keyup', function () {
-        table.columns(2).search(this.value).draw();
+        table.column(2).search(this.value).draw();
     });
 
-    // Filter by Subcategoria
+    // Filter by Subcategoría
     $('#subCategoriaFilterIcon').on('click', function () {
         $('#subCategoriaFilter').toggle();
     });
     $('#subCategoriaFilter').on('keyup', function () {
-        table.columns(3).search(this.value).draw();
+        table.column(3).search(this.value).draw();
     });
 
     // Handle Edit icon click

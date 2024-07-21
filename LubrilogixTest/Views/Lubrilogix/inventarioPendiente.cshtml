@@ -25,7 +25,11 @@
                 <th>Nombre Sucursal</th>
                 <th>Nombre Producto</th>
                 <th>Cantidad</th>
-                <th>aprobar</th>
+                @if (userInSpecificGroup)
+                {
+                    <th>aprobar</th>
+                }
+               
             </tr>
         </thead>
         <tbody>

@@ -1,0 +1,235 @@
+﻿/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.right-link {
+    color: black;
+    float: right; /* Float the link to the right */
+    margin-right: 100px; /* Add some right margin for spacing */
+}
+
+
+/* Center the form */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form container styles */
+.form-container {
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid #4caf50; /* Add green border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+}
+
+.form-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Text input styles */
+.txtClass {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Button styles */
+.btnClass {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .btnClass:hover {
+        background-color: #2980b9;
+    }
+/*estilo para la tabla*/
+/* Estilo para la tabla principal */
+.gridview {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    /* Estilo para el encabezado de la tabla */
+    .gridview th {
+        background-color: #f2f2f2;
+        color: #333;
+        font-weight: bold;
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    /* Estilo para las celdas de datos */
+    .gridview td {
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    /* Estilo para las filas impares */
+    .gridview tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    /* Estilo para el hover de las filas */
+    .gridview tr:hover {
+        background-color: #eaeaea;
+    }
+
+
+/* Error message styles */
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Success message styles */
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+/*Clases para el mensaje*/
+.message-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    max-width: 400px;
+    /* background-color: white; */ /* Remove this line to use default white background */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white; /* Add this line to ensure the content area is white */
+}
+
+    .message-box span {
+        padding: 4px;
+    }
+
+.dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo con transparencia */
+    backdrop-filter: blur(5px); /* Aplica el desenfoque */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnMensaje {
+    margin-top: 40px;
+}
+
+.boton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #bd4848;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+}
+    /*Efector hover para los botones*/
+    .boton:hover {
+        background-color: #ed9292;
+    }
+
+.dropdownMenu {
+    position: relative; /* Ensure proper positioning */
+    float: right; /* Move the dropdown menu to the right */
+}
+
+/*Estilo del Modal*/
+/*Estilo del boton*/
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+}
+    /*Efector hover para los botones*/
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+.modal {/*Estilo del modal*/
+    display: none;/*Ocultar el modal por defecto*/
+    position: fixed;/*Mantiene el modal en la misma posicion*/
+    z-index: 1;/*Asegura que el modal este encima de los elemtos*/
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;/*Habilita el scroll*/
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {/*Contenido del modal*/
+    background-color: #fefefe;
+    margin: 15% auto;/*Centra verticalmente*/
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;/*Ancho del modal*/
+    max-width: 500px;/*Ancho maximo del modal*/
+}
+
+.modal-header, .modal-footer {/*Cabeza y el pie del modal*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {/*Boton de cierre del modal*/
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+    /*Efecto hover y focus para el boton de cierre*/
+    .close-btn:hover,
+    .close-btn:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.form-group {/*Estilo de los grupos del form*/
+    margin-bottom: 15px;
+}
+
+    .form-group label {/*Estilos de las etiquetas del form*/
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {/*Estilo de los campos del form*/
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
