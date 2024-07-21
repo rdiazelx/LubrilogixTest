@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Inventario";
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @model List<LubrilogixTest.Models.spLeerInventario_Result>
@@ -21,9 +21,17 @@
         <tr>
             <th>
                 <div class="filter-container">
+                    <i class="fas fa-filter" id="idOrdenFilterIcon"></i>
+                    <div class="filter-input">
+                        <input type="text" id="idOrdenFilter" placeholder="Filtro por ID Orden" style="display:block;" />
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="filter-container">
                     <i class="fas fa-filter" id="fechaFilterIcon"></i>
                     <div class="filter-input">
-                        <input type="text" id="fechaFilter" placeholder="Filtro por fecha" style="display:none;" />
+                        <input type="text" id="fechaFilter" placeholder="Filtro por fecha" style="display:block;" />
                     </div>
                 </div>
             </th>
@@ -31,7 +39,7 @@
                 <div class="filter-container">
                     <i class="fas fa-filter" id="sucursalFilterIcon"></i>
                     <div class="filter-input">
-                        <input type="text" id="sucursalFilter" placeholder="Filtro por sucursal" style="display:none;" />
+                        <input type="text" id="sucursalFilter" placeholder="Filtro por sucursal" style="display:block;" />
                     </div>
                 </div>
             </th>
@@ -39,7 +47,37 @@
                 <div class="filter-container">
                     <i class="fas fa-filter" id="productoFilterIcon"></i>
                     <div class="filter-input">
-                        <input type="text" id="productoFilter" placeholder="Filtro por producto" style="display:none;" />
+                        <input type="text" id="productoFilter" placeholder="Filtro por producto" style="display:block;" />
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="filter-container">
+                    <i class="fas fa-filter" id="nombreProductoFilterIcon"></i>
+                    <div class="filter-input">
+                        <input type="text" id="nombreProductoFilter" placeholder="Filtro por nombre producto" style="display:block;" />
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="filter-container">
+                    <i class="fas fa-filter" id="tipoOperacionFilterIcon"></i>
+                    <div class="filter-input">
+                        <select id="tipoOperacionFilter" style="display:block;">
+                            <option value="">-- Seleccione Tipo Operación --</option>
+                            <option value="compra">Compra</option>
+                            <option value="venta">Venta</option>
+                            <option value="ajuste">Ajuste</option>
+                            <option value="devolucion">Devolución</option>
+                        </select>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="filter-container">
+                    <i class="fas fa-filter" id="proveedorFilterIcon"></i>
+                    <div class="filter-input">
+                        <input type="text" id="proveedorFilter" placeholder="Filtro por proveedor" style="display:block;" />
                     </div>
                 </div>
             </th>
@@ -47,7 +85,8 @@
                 <div class="filter-container">
                     <i class="fas fa-filter" id="estadoFilterIcon"></i>
                     <div class="filter-input">
-                        <select id="estadoFilter" style="display:none;">
+                        <select id="estadoFilter" style="display:block;">
+                            <option value="">-- Seleccione Estado --</option>
                             <option value="Aprobado">Aprobado</option>
                             <option value="Pendiente">Pendiente</option>
                             <option value="">Nulo</option>
@@ -128,5 +167,6 @@
 @section Scripts {
     <script src="~/js/inventario.js"></script>
 }
+
 
 <link href="~/css/filterstyle.css" rel="stylesheet" />

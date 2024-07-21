@@ -88,8 +88,7 @@ main {
 
 
 /* Container Styles */
-.container-login,
-.container-menu {
+.container-login {
     width: 15rem; /* Adjusting to rem */
     height: 100%;
     display: flex;
@@ -103,11 +102,7 @@ main {
     padding: 0;
 }
 
-.container-menu {
-    left: 0;
-    height: 200%; /* Consider adjusting this for smaller screens */
-    background-color: forestgreen;
-}
+
 
 /* Sidebar Styles */
 .sidebar {
@@ -155,8 +150,7 @@ main {
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
-    .container-login,
-    .container-menu {
+    .container-login {
         width: 12rem; /* Smaller width for smaller screens */
     }
 
@@ -171,8 +165,7 @@ main {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-    .container-login,
-    .container-menu {
+    .container-login {
         width: 14rem; /* Adjust width */
     }
 
@@ -187,8 +180,7 @@ main {
 }
 
 @media (min-width: 1025px) {
-    .container-login,
-    .container-menu {
+    .container-login {
         width: 15rem; /* Default width */
     }
 

@@ -30,10 +30,11 @@
     <thead>
         <tr>
             <th>
+               
                 <div class="filter-container">
                     <i class="fas fa-filter" id="nombreFilterIcon"></i>
                     <div class="filter-input">
-                        <input type="text" id="nombreFilter" placeholder="Filtro por nombre" style="display:none;" />
+                        <input type="text" id="nombreFilter" placeholder="Filtro por nombre" style="display:block;" />
                     </div>
                 </div>
             </th>
@@ -41,7 +42,7 @@
                 <div class="filter-container">
                     <i class="fas fa-filter" id="provinciaFilterIcon"></i>
                     <div class="filter-input">
-                        <input type="text" id="provinciaFilter" placeholder="Filtro por provincia" style="display:none;" />
+                        <input type="text" id="provinciaFilter" placeholder="Filtro por provincia" style="display:block;" />
                     </div>
                 </div>
             </th>
@@ -49,7 +50,7 @@
                 <div class="filter-container">
                     <i class="fas fa-filter" id="estadoFilterIcon"></i>
                     <div class="filter-input">
-                        <select id="estadoFilter" style="display:none;">
+                        <select id="estadoFilter" style="display:block;">
                             <option value="Activo">Activo</option>
                             <option value="Inactivo">Inactivo</option>
                             <option value="">Nulo</option>
@@ -144,6 +145,9 @@
 
 @section Scripts {
     <script src="~/js/proveedores.js"></script>
+    <script src="~/js/proveedoresfilters.js"></script>
+
+
     <link href="~/css/modalstyles.css" rel="stylesheet" />
     <script src="~/js/modalproveedor.js"></script>
     <script>

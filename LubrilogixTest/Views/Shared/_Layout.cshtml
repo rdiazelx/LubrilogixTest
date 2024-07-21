@@ -40,7 +40,7 @@
             </button>
         </div>
 
-        <div class="container-menu">
+       
             @if (User.Identity.IsAuthenticated)
             {
                 <div class="sidebar" id="sidebar">
@@ -58,6 +58,12 @@
                                 <span class="menu-text">Inventario</span>
                             </a>
                         </span>
+                    <span class="nav-item-menu">
+                        <a class="nav-link-menu" asp-area="" asp-controller="Lubrilogix" asp-action="Inventario">
+                            <i class="fas fa-box"></i>
+                            <span class="menu-text">Historial</span>
+                        </a>
+                    </span>
                         <span class="nav-item-menu">
                             <a class="nav-link-menu" asp-area="" asp-controller="Lubrilogix" asp-action="Proveedores">
                                 <i class="fas fa-truck"></i>
@@ -79,8 +85,7 @@
                     </ul>
                 </div>
             }
-        </div>
-    </header>
+         </header>
 
     <div class="container">
         <main role="main" class="pb-3">
