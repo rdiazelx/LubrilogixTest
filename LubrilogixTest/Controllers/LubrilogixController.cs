@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication;
+using AspNetCore;
 
 
 namespace WebApp_OpenIDConnect_DotNet.Controllers
@@ -199,10 +200,149 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        public async Task<IActionResult> AgregarProducto([FromBody] Producto producto)
+        {
+            // Verificar que los datos del producto no sean nulos ni estén vacíos
+            if (producto == null || string.IsNullOrWhiteSpace(producto.TcNombre) ||
+                string.IsNullOrWhiteSpace(producto.TcCategoria) || string.IsNullOrWhiteSpace(producto.TcSubcategoria))
+            {
+                return BadRequest("Invalid product data.");
+            }
 
+            try
+            {
+                // Intentar insertar el producto en la base de datos llamando al método asincrónico en el contexto de la base de datos
+                await _context.AgregarProductoAsync(producto);
+                return Ok("Producto agregado exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                // Registrar la excepción con un mensaje de error detallado
+                _logger.LogError(ex, "Error inserting product: {Producto}", producto);
 
+                // Retornar una respuesta de error con un código de estado 500
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        public async Task<IActionResult> AgregarSucursal([FromBody] Sucursale sucursal)
+        {
+            if (sucursal == null)
+            {
+                return BadRequest("Sucursal data is null.");
+            }
 
+            if (string.IsNullOrEmpty(sucursal.TcNombre) ||
+                string.IsNullOrEmpty(sucursal.TcProvincia) ||
+                string.IsNullOrEmpty(sucursal.TcDireccion) ||
+                string.IsNullOrEmpty(sucursal.TcTelefono) ||
+                string.IsNullOrEmpty(sucursal.TcCorreo) ||
+                string.IsNullOrEmpty(sucursal.TcEstado) ||
+                string.IsNullOrEmpty(sucursal.TcComentarios))
+            {
+                return BadRequest("All fields are required.");
+            }
 
+            try
+            {
+                // Llama al método del contexto para agregar la sucursal
+                await _context.AgregarSurcursalAsync(sucursal);
+
+                return Ok("Sucursal agregada exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                // Loguea el error
+                _logger.LogError(ex, "Error al agregar la sucursal.");
+
+                // Devuelve una respuesta de error
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        public async Task<IActionResult> AgregarProveedor([FromBody] Proveedore proveedor)
+        {
+            // Verifica si los datos del proveedor son nulos
+            if (proveedor == null)
+            {
+                return BadRequest("Proveedor data is null.");
+            }
+
+            // Verifica si todos los campos requeridos están presentes
+            if (string.IsNullOrEmpty(proveedor.TcNombre) ||
+                string.IsNullOrEmpty(proveedor.TcProvincia) ||
+                string.IsNullOrEmpty(proveedor.TcDireccion) ||
+                string.IsNullOrEmpty(proveedor.TcEmail) ||
+                string.IsNullOrEmpty(proveedor.TcEstado))
+            {
+                return BadRequest("All fields are required.");
+            }
+
+            try
+            {
+                // Llama al método del contexto para agregar el proveedor
+                await _context.AgregarProveedorAsync(proveedor);
+
+                return Ok("Proveedor agregado exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                // Loguea el error
+                _logger.LogError(ex, "Error al agregar el proveedor.");
+
+                // Devuelve una respuesta de error
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        /*Este procedimiento se paso para HomeController*/
+        //public async Task<IActionResult> RegistroProveedor([FromBody] Proveedore registroProveedor)
+        //{
+        //    // Verifica si los datos del proveedor son nulos
+        //    if (registroProveedor == null)
+        //    {
+        //        return BadRequest("Proveedor inválido.");
+        //    }
+
+        //    // Verifica si todos los campos requeridos están presentes
+        //    if (string.IsNullOrEmpty(registroProveedor.TcNombre) ||
+        //        string.IsNullOrEmpty(registroProveedor.TcProvincia) ||
+        //        string.IsNullOrEmpty(registroProveedor.TcDireccion) ||
+        //        string.IsNullOrEmpty(registroProveedor.TcEmail))
+        //    {
+        //        return BadRequest("Todos los campos son requeridos.");
+        //    }
+
+        //    try
+        //    {
+        //        // Llama al método del contexto para registrar el proveedor
+        //        await _context.RegistroProveedorAsync(new Proveedore
+        //        {
+        //            TcNombre = registroProveedor.TcNombre,
+        //            TcProvincia = registroProveedor.TcProvincia,
+        //            TcDireccion = registroProveedor.TcDireccion,
+        //            TcEmail = registroProveedor.TcEmail
+        //            // TcEstado se establecerá en "inactivo" en el método RegistroProveedorAsync
+        //        });
+
+        //        return Ok("Proveedor agregado exitosamente.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Loguea el error
+        //        _logger.LogError(ex, "Error al agregar el proveedor.");
+
+        //        // Devuelve una respuesta de error
+        //        return StatusCode(500, $"Error al agregar el proveedor: {ex.Message}");
+        //    }
+        //}
+    }
 
     }
-    }
+
+
+
+
+
+
+
+
+
+    

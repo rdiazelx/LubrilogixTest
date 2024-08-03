@@ -60,6 +60,20 @@ namespace WebApp_OpenIDConnect_DotNet
             // Register the DbContext
             services.AddDbContext<LubrilogixDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost",
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:7051")
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
+
+            services.AddControllers();
+            // Otros servicios
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,6 +106,73 @@ namespace WebApp_OpenIDConnect_DotNet
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseCors("AllowLocalhost");
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
+        //public void ConfigureServices(IServiceCollection services)
+        //{
+        //    services.AddCors(options =>
+        //    {
+        //        options.AddPolicy("AllowLocalhost",
+        //            builder =>
+        //            {
+        //                builder.WithOrigins("https://localhost:7051")
+        //                       .AllowAnyHeader()
+        //                       .AllowAnyMethod();
+        //            });
+        //    });
+
+        //    services.AddControllers();
+        //    // Otros servicios
+        //}
+
+        //public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        //{
+        //    if (env.IsDevelopment())
+        //    {
+        //        app.UseDeveloperExceptionPage();
+        //    }
+        //    else
+        //    {
+        //        app.UseExceptionHandler("/Home/Error");
+        //        app.UseHsts();
+        //    }
+
+        //    app.UseHttpsRedirection();
+        //    app.UseStaticFiles();
+
+        //    app.UseRouting();
+
+        //    app.UseCors("AllowLocalhost");
+
+        //    app.UseAuthorization();
+
+        //    app.UseEndpoints(endpoints =>
+        //    {
+        //        endpoints.MapControllers();
+        //    });
+        //}
+
     }
 }

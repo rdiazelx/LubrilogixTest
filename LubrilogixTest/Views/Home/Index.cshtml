@@ -1,32 +1,62 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    ViewData["IsIndexPage"] = true; // Agrega esta línea para identificar la página de inicio
 }
 
 <link href="~/css/imagen_portada.css" rel="stylesheet" />
+<link href="~/css/modalstyles.css" rel="stylesheet" />
 
+<!-- Agregar un atributo data-page en el <body> -->
+<body data-page="@ViewData["IsIndexPage"]">
+    <div class="center-container">
+        <br />
+        <h2>Bienvenido a Lubrilogix</h2>
+        <br />
+    </div>
 
+    <div class="imagen_portada">
+        <img src="~/Prueba/lubrilogix.jpg" alt="Logo" class="img-fluid" />
+    </div>
 
-<div class="center-container">
     <br />
-    <h2>Bienvenido a Lubrilogix</h2>
-    <br />
-    <h3 style="color: red;">El acceso no autorizado a este sistema está prohibido</h3>
-</div>
-<div class="imagen_portada">
+    <div class="button-container">
+        <button id="openRegistrarProBtn" class="btn" type="button">Registrarse como proveedor</button>
+    </div>
 
-    <img src="~/Prueba/lubrilogix.jpg" alt="Logo" class="img-fluid" />
+    <!-- El modal -->
+    <div id="addRegistrarProModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Registro para proveedor</h2>
+            </div>
+            <div class="modal-body">
+                <form id="addRegistrarProForm">
+                    <div class="form-group">
+                        <label for="proveedorNombre">Nombre del Proveedor</label>
+                        <input type="text" id="proveedorNombre" placeholder="Ingrese el nombre del proveedor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="proveedorProvincia">Provincia del proveedor</label>
+                        <input type="text" id="proveedorProvincia" placeholder="Ingrese la provincia del proveedor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="proveedorDireccion">Dirección</label>
+                        <input type="text" id="proveedorDireccion" placeholder="Ingrese la dirección del proveedor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="proveedorEmail">Email</label>
+                        <input type="email" id="proveedorEmail" placeholder="Ingrese el email del proveedor" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="closeModalBtn" type="button">Cerrar</button>
+                <button class="btn" id="saveProveedorButton" type="button">Agregar proveedor</button>
+            </div>
+        </div>
+    </div>
 
-</div>
-@* 
-
-<div>
-    <ul>
-        @if (ViewBag.Claims != null)
-        {
-            foreach (var claim in ViewBag.Claims)
-            {
-                <li>@claim.Type: @claim.Value</li>
-            }
-        }
-    </ul>
-</div> *@
+    @section Scripts {
+        <script src="~/js/modalregistrop.js"></script>
+    }
+</body>

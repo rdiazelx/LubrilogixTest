@@ -14,7 +14,13 @@
 }
 
 <h1>Sucursales</h1>
+<br />
+@if (userInSpecificGroup)
+{
+    <!-- Botón para abrir el modal -->
+    <button id="openSurcusalBtn" class="btn">Agregar sucursal</button>
 
+}
 <br />
 <br />
 
@@ -105,9 +111,55 @@
         <p>No group claims found.</p>
     }
 </div>
+@* El cuerpo del modal *@
+<div id="addSucursalModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Agregar sucursal</h2>@* El titulo del modal *@
+        </div>
+        <div class="modal-body">
+            <form id="addSucursalForm">
+                @* El formulario que va dentro el modal *@
+                <div class="form-group">
+                    <label for="sucursalNombre">Nombre de la Sucursal</label>
+                    <input type="text" id="sucursalNombre" placeholder="Ingrese el nombre de la sucursal" required>
+                </div>
+                <div class="form-group">
+                    <label for="sucursalProvincia">Provincia</label>
+                    <input type="text" id="sucursalProvincia" placeholder="Ingrese el producto que suministra" required>
+                </div>
+                <div class="form-group">
+                    <label for="sucursalDireccion">Dirección</label>
+                    <input type="text" id="sucursalDireccion" placeholder="Ingrese la dirección de la sucursal" required>
+                </div>
+                <div class="form-group">
+                    <label for="sucursalTelefono">Teléfono</label>
+                    <input type="text" id="sucursalTelefono" placeholder="Ingrese el teléfono de la sucursal" required>
+                </div>
+                <div class="form-group">
+                    <label for="sucursalCorreo">Correo</label>
+                    <input type="email" id="sucursalCorreo" placeholder="Ingrese el correo de la sucursal" required>
+                </div>
+                <div class="form-group">
+                    <label for="sucursalEstado">Estado</label>
+                    <input type="email" id="sucursalEstado" placeholder="Ingrese el estado de la sucursal" required>
+                </div>
+                <div class="form-group">
+                    <label for="sucursalComentario">Comentario</label>
+                    <input type="email" id="sucursalComentario" placeholder="Ingrese el comentario de la sucursal" required>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" id="closeModalBtn">Cerrar</button>@* El boton para cerrar *@
+            <button class="btn" id="saveSucursalButton">Agregar sucursal</button>@* El boton para agregar el producto *@
+        </div>
+    </div>
+</div>
 
 
 @section Scripts {
     <script src="~/js/sucursales.js"></script>
-
+    <script src="~/js/modalsurcusal.js"></script>
+    <link href="~/css/modalstyles.css" rel="stylesheet" />
 }

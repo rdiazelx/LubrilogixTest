@@ -15,13 +15,7 @@
 
 <br />
 
-@if (userInSpecificGroup)
-{
-    <div>
-        @* El botón para abrir el modal *@
-        <button id="openModalBtn" class="btn">Agregar Producto</button>
-    </div>
-}
+
 
 
     <label for="viewSelector">Seleccione una vista:</label>
@@ -39,39 +33,6 @@
 </div>
 
 <br />
-<div>
-    @* El cuerpo del modal *@
-    <div id="addProductModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title">Agregar producto</h1> @* El titulo del modal *@
-            </div>
-            <div class="modal-body">
-                @* El formulario que va dentro el modal *@
-                <form id="addProductForm">
-                    <div class="form-group">
-                        @* @* Espacio para agregar el nombre del producto *@
-                        <label for="productoNombre">Nombre del Producto</label>
-                        <input type="text" id="productoNombre" placeholder="Ingrese el nombre del producto" required>
-                    </div>
-                    <div class="form-group">
-                        @* Espacio para agregar la categoria del prodcuto *@
-                        <label for="productoCategoria">Categoria </label>
-                        <input type="text" id="productoCategoria" placeholder="Ingrese la categoria del producto" required>
-                    </div>
-                    <div class="form-group">
-                        @* Espacio para la subcategoria del producto *@
-                        <label for="productoSub">Subcategoria</label>
-                        <input type="text" id="productoSub" placeholder="Ingrese el subcategoria del producto" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" id="closeModalBtn">Cerrar</button> @* El boton para cerrar *@
-                <button class="btn" id="saveProductButton">Agregar producto</button>  @* El boton para agregar el producto *@
-            </div>
-        </div>
-    </div>
 
 @section Scripts {
 

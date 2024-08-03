@@ -163,55 +163,45 @@ body {
     float: right; /* Move the dropdown menu to the right */
 }
 
-/*Estilo del Modal*/
-/*Estilo del boton*/
-.btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 5px;
-}
-    /*Efector hover para los botones*/
-    .btn:hover {
-        background-color: #0056b3;
-    }
-
-.modal {/*Estilo del modal*/
-    display: none;/*Ocultar el modal por defecto*/
-    position: fixed;/*Mantiene el modal en la misma posicion*/
-    z-index: 1;/*Asegura que el modal este encima de los elemtos*/
+/* Estilo del Modal */
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed; /* Mantiene el modal en la misma posición */
+    z-index: 1; /* Asegura que el modal esté encima de los elementos */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;/*Habilita el scroll*/
-    background-color: rgba(0,0,0,0.4);
+    overflow: auto; /* Habilita el scroll */
+    background-color: rgba(0,0,0,0.4); /* Fondo semitransparente */
 }
 
-.modal-content {/*Contenido del modal*/
-    background-color: #fefefe;
-    margin: 15% auto;/*Centra verticalmente*/
-    padding: 20px;
+/* Contenido del modal */
+.modal-content {
+    background-color: #86D29C; /* Color de fondo del modal */
+    margin: 15% auto; /* Centra verticalmente */
+    padding: 11px; /* Padding del modal */
     border: 1px solid #888;
-    width: 80%;/*Ancho del modal*/
-    max-width: 500px;/*Ancho maximo del modal*/
+    width: 80%; /* Ancho del modal */
+    max-width: 500px; /* Ancho máximo del modal */
 }
 
-.modal-header, .modal-footer {/*Cabeza y el pie del modal*/
+/* Cabeza y pie del modal */
+.modal-header, .modal-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.close-btn {/*Boton de cierre del modal*/
-    color: #aaa;
+/* Botón de cierre del modal */
+.close-btn {
+    color: #147908;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
 }
-    /*Efecto hover y focus para el boton de cierre*/
+
+    /* Efecto hover y focus para el botón de cierre */
     .close-btn:hover,
     .close-btn:focus {
         color: black;
@@ -219,17 +209,61 @@ body {
         cursor: pointer;
     }
 
-.form-group {/*Estilo de los grupos del form*/
+/* Estilo del botón */
+.btn {
+    padding: 10px 20px;
+    background-color: #147908; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none;
+    cursor: pointer;
+    margin: 8px;
+}
+
+    /* Efecto hover para los botones */
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+/* Estilo de los grupos del formulario */
+.form-group {
     margin-bottom: 15px;
 }
 
-    .form-group label {/*Estilos de las etiquetas del form*/
+    /* Estilos de las etiquetas del formulario */
+    .form-group label {
         display: block;
         margin-bottom: 5px;
     }
 
-    .form-group input {/*Estilo de los campos del form*/
+    /* Estilo de los campos del formulario */
+    .form-group input {
         width: 100%;
-        padding: 8px;
+        padding: 10px;
         box-sizing: border-box;
+    }
+/* Título del modal */
+.modal-title {
+    font-weight: bold; /* Letra en negrita */
+    font-family: 'Lucida Bright', serif; /* Fuente elegante */
+    font-size: 24px; /* Tamaño de la fuente del título */
+    text-align: center; /* Centra el texto */
+    margin: 0; /* Elimina el margen por defecto */
+}
+/* Estilo para los elementos select */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 16px;
+    color: #333;
+    box-sizing: border-box;
+}
+
+    select:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
     }

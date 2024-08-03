@@ -7,6 +7,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using LubrilogixTest.Models;
+using Microsoft.EntityFrameworkCore;
+
+
+
 
 namespace Lubrilogix.Controllers
 {
@@ -14,10 +18,13 @@ namespace Lubrilogix.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly LubrilogixDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, LubrilogixDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
 
@@ -105,8 +112,30 @@ namespace Lubrilogix.Controllers
 
         public async Task<IActionResult> Index()
         {
+
             await SetUserClaimsInViewBag();
+
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("SignIn", "Home", new { returnUrl = "/Lubrilogix/Inicio" });
+            }
+
+
             return View();
+        }
+
+
+
+        public IActionResult SignIn(string returnUrl = "/")
+        {
+            // If the user is authenticated, redirect to the specified returnUrl
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect(returnUrl);
+            }
+
+            // Otherwise, redirect to the login page
+            return Challenge(); // This will initiate the authentication process
         }
 
         public async Task<IActionResult> userClaims()
@@ -140,5 +169,48 @@ namespace Lubrilogix.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        #region Registro de proveedor
+        [HttpPost]
+        public async Task<IActionResult> RegistroProveedor([FromBody] Proveedore registroProveedor)
+        {
+            // Verifica si los datos del proveedor son nulos
+            if (registroProveedor == null)
+            {
+                return BadRequest("Proveedor inválido.");
+            }
+
+            // Verifica si todos los campos requeridos están presentes
+            if (string.IsNullOrEmpty(registroProveedor.TcNombre) ||
+                string.IsNullOrEmpty(registroProveedor.TcProvincia) ||
+                string.IsNullOrEmpty(registroProveedor.TcDireccion) ||
+                string.IsNullOrEmpty(registroProveedor.TcEmail))
+            {
+                return BadRequest("Todos los campos son requeridos.");
+            }
+
+            try
+            {
+                // Llama al método del contexto para registrar el proveedor
+                await _context.RegistroProveedorAsync(new Proveedore
+                {
+                    TcNombre = registroProveedor.TcNombre,
+                    TcProvincia = registroProveedor.TcProvincia,
+                    TcDireccion = registroProveedor.TcDireccion,
+                    TcEmail = registroProveedor.TcEmail
+                    // TcEstado se establecerá en "inactivo" en el método RegistroProveedorAsync
+                });
+
+                return Ok("Proveedor agregado exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                // Loguea el error
+                _logger.LogError(ex, "Error al agregar el proveedor.");
+
+                // Devuelve una respuesta de error
+                return StatusCode(500, $"Error al agregar el proveedor: {ex.Message}");
+            }
+        }
+        #endregion
     }
 }

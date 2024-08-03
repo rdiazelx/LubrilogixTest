@@ -148,7 +148,6 @@ main {
     white-space: nowrap;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .container-login {
         width: 12rem; /* Smaller width for smaller screens */
@@ -193,6 +192,7 @@ main {
         padding: 2rem;
     }
 }
+
 
 
     .nav-link-menu:hover {

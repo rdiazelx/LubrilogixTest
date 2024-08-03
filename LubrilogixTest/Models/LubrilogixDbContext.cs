@@ -213,7 +213,7 @@ public partial class LubrilogixDbContext : DbContext
 
         OnModelCreatingPartial(modelBuilder);
     }
-     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
 
     #endregion Model Builder
@@ -294,7 +294,7 @@ public partial class LubrilogixDbContext : DbContext
     }
 
     #endregion
-       
+
     #region Read Sucursales
     public async Task<List<Sucursale>> GetSucursalesAsync()
     {
@@ -386,6 +386,132 @@ public partial class LubrilogixDbContext : DbContext
 
     #endregion Read
 
+    #region Written Data  Procedures
+
+    //escribir en Agregar Producto
+    public async Task AgregarProductoAsync(Producto producto)
+    {
+        // Crear el parámetro del nombre del producto y asignar el valor 
+        var nombreParam = new SqlParameter("@Nombre", producto.TcNombre);
+
+        // Crear el parámetro de categoría del producto y asignar el valor 
+        var categoriaParam = new SqlParameter("@Categoria", producto.TcCategoria);
+
+        // Crear el parámetro de subcategoría del producto y asignar el valor
+        var subcategoriaParam = new SqlParameter("@Subcategoria", producto.TcSubcategoria);
+
+        try
+        {
+            // Ejecutar el procedimiento almacenado 'spAgregarProducto' con los parámetros especificados.
+            await Database.ExecuteSqlRawAsync(
+                "EXEC dbo.spAgregarProducto @Nombre, @Categoria, @Subcategoria",
+                nombreParam, categoriaParam, subcategoriaParam
+            );
+        }
+        catch (Exception ex)
+        {
+
+            // Lanza una nueva excepción con un mensaje detallado
+            throw new Exception($"Error inserting product: {ex.Message}", ex);
+        }
+    }
+    //escribir en surcusales
+    public async Task AgregarSurcursalAsync(Sucursale sucursal)
+    {
+        // Crear el parámetro del nombre de la sucursal y asignar el valor del objeto 'sucursal'
+        var nombreParam = new SqlParameter("@Nombre", sucursal.TcNombre);
+
+        // Crear el parámetro de provincia de la sucursal y asignar el valor del objeto 'sucursal'
+        var provinciaParam = new SqlParameter("@Provincia", sucursal.TcProvincia);
+
+        // Crear el parámetro de dirección de la sucursal y asignar el valor del objeto 'sucursal'
+        var direccionParam = new SqlParameter("@Direccion", sucursal.TcDireccion);
+
+        // Crear el parámetro de teléfono de la sucursal y asignar el valor del objeto 'sucursal'
+        var telefonoParam = new SqlParameter("@Telefono", sucursal.TcTelefono);
+
+        // Crear el parámetro de correo de la sucursal y asignar el valor del objeto 'sucursal'
+        var correoParam = new SqlParameter("@Correo", sucursal.TcCorreo);
+
+        // Crear el parámetro de estado de la sucursal y asignar el valor del objeto 'sucursal'
+        var estadoParam = new SqlParameter("@Estado", sucursal.TcEstado);
+
+        // Crear el parámetro de comentarios de la sucursal y asignar el valor del objeto 'sucursal'
+        var comentariosParam = new SqlParameter("@Comentarios", sucursal.TcComentarios);
+
+        try
+        {
+            // Ejecutar el procedimiento almacenado 'spAgregarSucursal' de forma asíncrona
+            // y pasar los parámetros creados anteriormente
+            await Database.ExecuteSqlRawAsync(
+                "EXEC dbo.spAgregarSucursal @Nombre, @Provincia, @Direccion, @Telefono, @Correo, @Estado, @Comentarios",
+                nombreParam, provinciaParam, direccionParam, telefonoParam, correoParam, estadoParam, comentariosParam
+            );
+        }
+        catch (Exception ex)
+        {
+            // Lanza una nueva excepción con un mensaje detallado que incluye el mensaje de la excepción original
+            throw new Exception($"Error inserting branch: {ex.Message}", ex);
+        }
+    }
+    //escribir en proveedores
+    public async Task AgregarProveedorAsync(Proveedore proveedor)
+    {
+        // Crear el parámetro del nombre del proveedor y asignar el valor 
+        var nombreParam = new SqlParameter("@Nombre", proveedor.TcNombre);
+        // Crear el parámetro de la provincia del proveedor y asignar el valor 
+        var provinciaParam = new SqlParameter("@Provincia", proveedor.TcProvincia);
+        // Crear el parámetro de la dirección del proveedor y asignar el valor]
+        var direccionParam = new SqlParameter("@Direccion", proveedor.TcDireccion);
+        // Crear el parámetro del email del proveedor y asignar el valor 
+        var emailParam = new SqlParameter("@Email", proveedor.TcEmail);
+        // Crear el parámetro del estado del proveedor y asignar el valor 
+        var estadoParam = new SqlParameter("@Estado", proveedor.TcEstado);
+
+        try
+        {
+            // Ejecutar el procedimiento almacenado 'spAgregarProveedor']
+            await Database.ExecuteSqlRawAsync(
+                "EXEC dbo.spAgregarProveedor @Nombre, @Direccion, @Provincia, @Email, @Estado",
+                nombreParam, direccionParam, provinciaParam, emailParam, estadoParam
+            );
+        }
+        catch (Exception ex)
+        {
+            // Lanza una nueva excepción con un mensaje 
+            throw new Exception($"Error inserting supplier: {ex.Message}", ex);
+        }
+    }
+    #region written registro proveedor 
+    public async Task RegistroProveedorAsync(Proveedore proveedor)
+    {
+        // Establece el estado por defecto a "inactivo"
+        proveedor.TcEstado = "inactivo";
+
+        // Crear los parámetros para el procedimiento almacenado
+        var nombreParam = new SqlParameter("@Nombre", proveedor.TcNombre);
+        var provinciaParam = new SqlParameter("@Provincia", proveedor.TcProvincia);
+        var direccionParam = new SqlParameter("@Direccion", proveedor.TcDireccion);
+        var emailParam = new SqlParameter("@Email", proveedor.TcEmail);
+        var estadoParam = new SqlParameter("@Estado", proveedor.TcEstado);
+
+        try
+        {
+            // Ejecutar el procedimiento almacenado 'spAgregarProveedor' con el parámetro @Estado
+            await Database.ExecuteSqlRawAsync(
+                "EXEC dbo.spAgregarProveedor @Nombre, @Direccion, @Provincia, @Email, @Estado",
+                nombreParam, direccionParam, provinciaParam, emailParam, estadoParam
+            );
+        }
+        catch (Exception ex)
+        {
+            // Lanza una nueva excepción con un mensaje
+            throw new Exception($"Error inserting supplier: {ex.Message}", ex);
+        }
+    }
+    #endregion
+    #endregion
+}
 
 
 
@@ -403,4 +529,3 @@ public partial class LubrilogixDbContext : DbContext
 
     #endregion
 
-}
