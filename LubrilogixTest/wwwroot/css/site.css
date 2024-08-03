@@ -1,10 +1,17 @@
-﻿* {
+﻿/* Reset styles for pseudo-elements */
+*::before,
+*::after {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: inherit;
 }
 
 
+/* Set the root font size */
+html {
+    font-size: 100%; /* 1rem = 16px */
+    box-sizing: border-box;
+}
 
 /* Provide sufficient contrast against white background */
 a {
@@ -32,14 +39,6 @@ html, body {
     flex-direction: column;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color:aqua !important;
-}
-
-
 .container {
     display: flex;
     justify-content: center; /* Center child elements */
@@ -48,43 +47,16 @@ body {
 }
 
 
-
+/* General Main Styles */
 main {
-    width: calc(100% - 15rem); /* Base width adjustment */
-    max-width: 1200px; /* Optional: set a max width */
+    width: 100rem; /* Adjust base width to desired size */
     margin: 0 auto; /* Center horizontally */
-    padding: 1.5rem;
+    padding: 1.5rem; /* Padding around content */
     background-color: navajowhite;
     transition: width 0.3s; /* Smooth transition */
-    position: relative; /* Ensure it positions correctly */
+    position: relative; /* Ensure proper positioning */
+    overflow: auto; /* Allows scrolling if content overflows */
 }
-
-
-@media (max-width: 768px) {
-    main {
-        width: 100%; /* Full width on small screens */
-        margin-left: 0; /* No left margin */
-        padding: 1rem;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    main {
-        width: calc(100% - 10rem); /* Adjust width */
-        margin-left: 0; /* No left margin */
-        padding: 1.5rem;
-    }
-}
-
-@media (min-width: 1025px) {
-    main {
-        width: calc(100% - 15rem); /* Maintain width */
-        margin-left: 0%; /* Keep left margin */
-        padding: 2rem;
-    }
-}
-
-
 
 
 /* Container Styles */

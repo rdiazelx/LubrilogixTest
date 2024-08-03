@@ -8,17 +8,14 @@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/filterstyle.css" rel="stylesheet" />
 
     @* no tocar font awesome*@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
     @* no tocar font awesome*@
 
-
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link href="~/css/filterstyle.css" rel="stylesheet" />
 
 
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
@@ -38,13 +35,17 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+
         </div>
 
        
             @if (User.Identity.IsAuthenticated)
             {
                 <div class="sidebar" id="sidebar">
-                    <button class="toggle-button" id="toggleButton">☰</button>
+
+                    <button class="toggle-button" id="toggleButton">☰</button> 
+
                     <ul class="navbar-nav-menu">
                         <span class="nav-item-menu">
                             <a class="nav-link-menu" asp-area="" asp-controller="Lubrilogix" asp-action="Inicio">
