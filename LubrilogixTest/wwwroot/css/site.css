@@ -43,18 +43,56 @@ html, body {
     justify-content: center; /* Center child elements */
     align-items: stretch; /* Ensure children take full height */
     width: 100%;
+
 }
 
 main {
-    width: 90rem; /* Adjust base width to desired size */
+  
     height: 60rem; /* Set a specific height */
-    background-color: navajowhite;
+    background-color: white;
     margin: 0 auto; /* Center horizontally */
     padding: 2rem; /* Increased padding around content */
     transition: width 0.3s, height 0.3s; /* Smooth transition for both width and height */
     position: relative; /* Ensure proper positioning */
     overflow: auto; /* Allows scrolling if content overflows */
 }
+
+.main-container {
+    width: 100%;
+    max-width: 120rem; /* Adjust this as needed */
+    margin-left: 1rem;
+    border: 1px solid green; /* Adds a 2px solid green border */
+    padding: 1rem; /* Optional: Adds padding inside the border */
+    transition: filter 0.3s; /* Smooth transition for the blur effect */
+    z-index: 1; /* Lower than the sidebar */
+    position: relative; /* Ensure it stacks below the sidebar */
+}
+@media (min-width: 2560px) {
+    .main-container {
+        max-width: 165rem; /* Adjust the width for larger screens */
+    }
+}
+
+/* For screens between 1920px and 2560px (1080p and smaller 2K monitors) */
+@media (min-width: 1920px) and (max-width: 2559px) {
+    .main-container {
+        max-width: 110rem; /* Default width or adjust as needed */
+    }
+}
+
+/* For screens up to 1920px (1080p monitor) */
+@media (max-width: 1919px) {
+    .main-container {
+        max-width: 100%; /* Full width for smaller screens */
+        margin-left: 0; /* Remove left margin if needed */
+    }
+}
+
+
+    .main-container.blurred {
+        filter: blur(5px); /* Adjust the blur intensity as needed */
+    }
+
 
 /* Container Styles */
 .container-login {
@@ -69,12 +107,13 @@ main {
     top: 0; /* Ensure it starts from the top */
     margin: 0;
     padding: 0;
+    z-index: 1000; /* Make sure this value is high enough */
 }
 
 /* Sidebar Styles */
 .sidebar {
     height: 100vh;
-    width: 12rem; /* Using rem */
+    width: 4.375rem; /* Collapsed width */
     position: fixed;
     top: 0;
     left: 0;
@@ -83,7 +122,8 @@ main {
     padding-top: 1rem;
     display: flex;
     flex-direction: column;
-    transition: width 0.3s;
+    transition: width 0.3s; /* Smooth transition */
+    z-index: 1000; /* Make sure this value is high enough */
 }
 
     .sidebar.collapsed {
