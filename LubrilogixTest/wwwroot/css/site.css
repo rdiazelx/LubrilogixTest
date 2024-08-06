@@ -6,7 +6,6 @@
     box-sizing: inherit;
 }
 
-
 /* Set the root font size */
 html {
     font-size: 100%; /* 1rem = 16px */
@@ -46,18 +45,16 @@ html, body {
     width: 100%;
 }
 
-
-/* General Main Styles */
 main {
-    width: 100rem; /* Adjust base width to desired size */
-    margin: 0 auto; /* Center horizontally */
-    padding: 1.5rem; /* Padding around content */
+    width: 90rem; /* Adjust base width to desired size */
+    height: 60rem; /* Set a specific height */
     background-color: navajowhite;
-    transition: width 0.3s; /* Smooth transition */
+    margin: 0 auto; /* Center horizontally */
+    padding: 2rem; /* Increased padding around content */
+    transition: width 0.3s, height 0.3s; /* Smooth transition for both width and height */
     position: relative; /* Ensure proper positioning */
     overflow: auto; /* Allows scrolling if content overflows */
 }
-
 
 /* Container Styles */
 .container-login {
@@ -73,8 +70,6 @@ main {
     margin: 0;
     padding: 0;
 }
-
-
 
 /* Sidebar Styles */
 .sidebar {
@@ -165,20 +160,18 @@ main {
     }
 }
 
+.nav-link-menu:hover {
+    background-color: #1b6ec2; /* Add hover effect */
+    color: white;
+}
 
+.nav-link-menu span {
+    margin-left: 10px;
+}
 
-    .nav-link-menu:hover {
-        background-color: #1b6ec2; /* Add hover effect */
-        color: white;
-    }
-
-    .nav-link-menu span {
-        margin-left: 10px;
-    }
-
-    .nav-link-menu .menu-text {
-        transition: opacity 0.3s;
-    }
+.nav-link-menu .menu-text {
+    transition: opacity 0.3s;
+}
 
 .sidebar.collapsed .menu-text {
     opacity: 0;
