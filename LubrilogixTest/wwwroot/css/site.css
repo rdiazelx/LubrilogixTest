@@ -52,7 +52,7 @@ html, body {
     margin: 0; /* Remove margins */
     padding: 0rem; /* Padding inside the container */
     border: 1px solid green; /* Adds a solid green border */
-    position: absolute; /* Ensure it stacks correctly */
+    position: relative; /* Ensure it stacks correctly */
     z-index: 1; /* Ensure proper stacking context */
     top: 5rem; /* Position from top */
     left:4.5rem;
@@ -222,7 +222,7 @@ main {
 }
 
 .footer {
-    margin-top: auto;
+    margin-top: 5rem;
     width: 100%;
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
