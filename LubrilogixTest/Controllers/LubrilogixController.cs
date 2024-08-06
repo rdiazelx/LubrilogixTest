@@ -51,11 +51,13 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
 
             return new List<string>(); // Return an empty list or handle accordingly if user is not authenticated
         }
+
+        #region controller methods Ricardo
         public IActionResult Inicio()
         {
             return View();
         }
-
+               
         public async Task<IActionResult> vistaInventario()
         {
             ViewBag.GroupClaims = await GetGroupClaimsAsync();
@@ -133,7 +135,6 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
             return View(totalInventory);
         }
 
-
         public async Task<IActionResult> inventarioPendiente()
         {
             ViewBag.GroupClaims = await GetGroupClaimsAsync();
@@ -178,7 +179,6 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
             return View(pendingInventory);
         }
 
-
         public async Task<IActionResult> UpdateOrderState(int tnIdOrden)
         {
             if (tnIdOrden <= 0)
@@ -200,6 +200,10 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        #endregion
+
+        #region Controller methods Fiorella
         public async Task<IActionResult> AgregarProducto([FromBody] Producto producto)
         {
             // Verificar que los datos del producto no sean nulos ni estén vacíos
@@ -292,50 +296,124 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-        /*Este procedimiento se paso para HomeController*/
-        //public async Task<IActionResult> RegistroProveedor([FromBody] Proveedore registroProveedor)
-        //{
-        //    // Verifica si los datos del proveedor son nulos
-        //    if (registroProveedor == null)
-        //    {
-        //        return BadRequest("Proveedor inválido.");
-        //    }
+        #endregion
 
-        //    // Verifica si todos los campos requeridos están presentes
-        //    if (string.IsNullOrEmpty(registroProveedor.TcNombre) ||
-        //        string.IsNullOrEmpty(registroProveedor.TcProvincia) ||
-        //        string.IsNullOrEmpty(registroProveedor.TcDireccion) ||
-        //        string.IsNullOrEmpty(registroProveedor.TcEmail))
-        //    {
-        //        return BadRequest("Todos los campos son requeridos.");
-        //    }
 
-        //    try
-        //    {
-        //        // Llama al método del contexto para registrar el proveedor
-        //        await _context.RegistroProveedorAsync(new Proveedore
-        //        {
-        //            TcNombre = registroProveedor.TcNombre,
-        //            TcProvincia = registroProveedor.TcProvincia,
-        //            TcDireccion = registroProveedor.TcDireccion,
-        //            TcEmail = registroProveedor.TcEmail
-        //            // TcEstado se establecerá en "inactivo" en el método RegistroProveedorAsync
-        //        });
+        #region controller methods JanCarlo
+        [HttpPost]
+        public async Task<IActionResult> UpdateProveedorData(int TnIdProveedor, string TcNombre, string TcDireccion, string TcProvincia, string TcEmail, string TcEstado)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid data.");
+            }
 
-        //        return Ok("Proveedor agregado exitosamente.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Loguea el error
-        //        _logger.LogError(ex, "Error al agregar el proveedor.");
+            try
+            {
+                // Crear un objeto Proveedore basado en los parámetros recibidos
+                var proveedor = new Proveedore
+                {
+                    TnIdProveedor = TnIdProveedor,
+                    TcNombre = TcNombre,
+                    TcDireccion = TcDireccion,
+                    TcProvincia = TcProvincia,
+                    TcEmail = TcEmail,
+                    TcEstado = TcEstado
+                };
 
-        //        // Devuelve una respuesta de error
-        //        return StatusCode(500, $"Error al agregar el proveedor: {ex.Message}");
-        //    }
-        //}
-    }
+                await _context.ActualizarProveedorAsync(proveedor);
 
-    }
+                TempData["SuccessMessage"] = "Provider data updated successfully.";
+                return RedirectToAction("Proveedores"); // Redirect to a relevant view
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating provider data for TnIdProveedor: {TnIdProveedor}", TnIdProveedor);
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProductoData(int TnIdProducto, string TcNombre, string TcCategoria, string TcSubcategoria)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid data.");
+            }
+
+            try
+            {
+                // Crear un objeto Producto basado en los parámetros recibidos
+                var producto = new Producto
+                {
+                    TnIdProducto = TnIdProducto,
+                    TcNombre = TcNombre,
+                    TcCategoria = TcCategoria,
+                    TcSubcategoria = TcSubcategoria,
+                };
+
+                await _context.ActualizarProductoAsync(producto);
+
+                TempData["SuccessMessage"] = "Provider data updated successfully.";
+                return RedirectToAction("Producto"); // Redirect to a relevant view
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating provider data for TnIdProducto: {TnIdProducto}", TnIdProducto);
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateSucursalesData(int TnIdSucursal, string TcNombre, string TcProvincia, string TcDireccion, string TcTelefono, string TcCorreo, string TcEstado, string TcComentarios)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid data.");
+            }
+
+            try
+            {
+                // Crear un objeto Producto basado en los parámetros recibidos
+                var sucursales = new Sucursale
+                {
+                    TnIdSucursal = TnIdSucursal,
+                    TcNombre = TcNombre,
+                    TcProvincia = TcProvincia,
+                    TcDireccion = TcDireccion,
+                    TcTelefono = TcTelefono,
+                    TcCorreo = TcCorreo,
+                    TcEstado = TcEstado,
+                    TcComentarios = TcComentarios,
+                };
+
+                await _context.ActualizarSucursalesAsync(sucursales);
+
+                TempData["SuccessMessage"] = "Sucursal data updated successfully.";
+                return RedirectToAction("Sucursal"); // Redirect to a relevant view
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating provider data for TnIdSucursal: {TnIdSucursal}", TnIdSucursal);
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+       #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+}
+}
 
 
 

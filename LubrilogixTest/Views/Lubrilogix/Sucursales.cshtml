@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Newtonsoft.Json
+
+@{
     ViewData["Title"] = "Sucursales";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -14,6 +16,7 @@
 }
 
 <h1>Sucursales</h1>
+
 <br />
 @if (userInSpecificGroup)
 {
@@ -21,7 +24,6 @@
     <button id="openSurcusalBtn" class="btn">Agregar sucursal</button>
 
 }
-<br />
 <br />
 
 <table id="filterTable" class="display">
@@ -65,6 +67,8 @@
 <div>
     @if (groupClaims != null && groupClaims.Any())
     {
+
+
         <table class="table table-bordered table-striped" id="sucursalesTable">
             <thead>
                 <tr>
@@ -76,31 +80,32 @@
                     <th>Correo</th>
                     <th>Estado</th>
                     <th>Comentarios</th>
-                    @if (userInSpecificGroup)
-                    {
-                        <th>Acciones</th> <!-- Ensure this matches the header above -->
-                    }
+                    <th class="editColumn" style="display:none;">Editar</th> <!-- Placeholder column -->
+                    @*  @if (userInSpecificGroup)
+                {
+                <th>Acciones</th> <!-- Ensure this matches the header above -->
+                } *@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var proveedore in Model)
+                @foreach (var sucursale in Model)
                 {
                     <tr>
-                        <td>@proveedore.TnIdSucursal</td>
-                        <td>@proveedore.TcNombre</td>
-                        <td>@proveedore.TcProvincia</td>
-                        <td>@proveedore.TcDireccion</td>
-                        <td>@proveedore.TcTelefono</td>
-                        <td>@proveedore.TcCorreo</td>
-                        <td>@proveedore.TcEstado</td>
-                        <td>@proveedore.TcComentarios</td>
-                        @if (userInSpecificGroup)
-                        {
-                            <td>
+                        <td>@sucursale.TnIdSucursal</td>
+                        <td>@sucursale.TcNombre</td>
+                        <td>@sucursale.TcProvincia</td>
+                        <td>@sucursale.TcDireccion</td>
+                        <td>@sucursale.TcTelefono</td>
+                        <td>@sucursale.TcCorreo</td>
+                        <td>@sucursale.TcEstado</td>
+                        <td>@sucursale.TcComentarios</td>
+                        <td class="editColumn" style="display:none;">
+                            @if (userInSpecificGroup)
+                            {
                                 <i class="fas fa-edit editIcon"></i>
                                 <i class="fas fa-save saveIcon" style="display:none;"></i>
-                            </td>
-                        }
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -111,7 +116,8 @@
         <p>No group claims found.</p>
     }
 </div>
-@* El cuerpo del modal *@
+
+
 <div id="addSucursalModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -158,8 +164,19 @@
 </div>
 
 
+
+
+
+
+<script>
+    // Pass the Razor variable to a JavaScript variable
+    var userInSpecificGroup = @Html.Raw(JsonConvert.SerializeObject(userInSpecificGroup));
+</script>
+
+
 @section Scripts {
     <script src="~/js/sucursales.js"></script>
     <script src="~/js/modalsurcusal.js"></script>
     <link href="~/css/modalstyles.css" rel="stylesheet" />
+
 }

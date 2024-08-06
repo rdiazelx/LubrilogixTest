@@ -14,8 +14,6 @@ public partial class LubrilogixDbContext : DbContext
     public LubrilogixDbContext()
     {
     }
-
-
     public LubrilogixDbContext(DbContextOptions<LubrilogixDbContext> options, IConfiguration configuration)
     : base(options)
     {
@@ -219,12 +217,11 @@ public partial class LubrilogixDbContext : DbContext
     #endregion Model Builder
 
 
-    #region StoredProcedures
+ #region StoredProcedures
+    
 
 
-    #region Read Data Procedures
-
-
+    #region read data procedures Ricardo Diaz
 
     #region Read data Productos
     public async Task<List<Producto>> GetProductosAsync()
@@ -364,7 +361,7 @@ public partial class LubrilogixDbContext : DbContext
 
     #endregion
 
-    #region
+    #region actualizar estado de las ordenes async Ricardo
     public async Task UpdateEstadoAsync(int tnIdOrden)
     {
         var tnIdOrdenParam = new SqlParameter("@TN_IdOrden", tnIdOrden);
@@ -386,7 +383,9 @@ public partial class LubrilogixDbContext : DbContext
 
     #endregion Read
 
-    #region Written Data  Procedures
+    #region  write data Fiorella
+
+    #region Write Data  Procedures Fiorela
 
     //escribir en Agregar Producto
     public async Task AgregarProductoAsync(Producto producto)
@@ -482,7 +481,8 @@ public partial class LubrilogixDbContext : DbContext
             throw new Exception($"Error inserting supplier: {ex.Message}", ex);
         }
     }
-    #region written registro proveedor 
+
+    #region write registro proveedor 
     public async Task RegistroProveedorAsync(Proveedore proveedor)
     {
         // Establece el estado por defecto a "inactivo"
@@ -510,22 +510,120 @@ public partial class LubrilogixDbContext : DbContext
         }
     }
     #endregion
+
     #endregion
+
+    #endregion
+
+    #region model methods JanCarlo
+
+    #region Actualizar Proveedores
+
+
+    public async Task ActualizarProveedorAsync(Proveedore proveedor)
+    {
+        var context = new LubrilogixDbContext();
+        try
+        {
+
+            // Create parameters
+            var idParameter = new SqlParameter("@TN_IdProveedor", proveedor.TnIdProveedor);
+            var nombreParameter = new SqlParameter("@TC_Nombre", proveedor.TcNombre);
+            var direccionParameter = new SqlParameter("@TC_Direccion", proveedor.TcDireccion);
+            var provinciaParameter = new SqlParameter("@TC_Provincia", proveedor.TcProvincia);
+            var emailParameter = new SqlParameter("@TC_Email", proveedor.TcEmail);
+            var estadoParameter = new SqlParameter("@TC_Estado", proveedor.TcEstado);
+
+            // Call stored procedure
+
+            await Database.ExecuteSqlRawAsync(
+                 "EXEC dbo.spActualizarDatosProveedor @TN_IdProveedor, @TC_Nombre, @TC_Direccion, @TC_Provincia, @TC_Email, @TC_Estado",
+                    idParameter, nombreParameter, direccionParameter, provinciaParameter, emailParameter, estadoParameter
+            );
+
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error updating provider: {ex.Message}");
+            throw new Exception($"Error updating provider: {ex.Message}", ex);
+        }
+    }
+    #endregion
+
+    #region Actualizar Productos
+
+
+    public async Task ActualizarProductoAsync(Producto producto)
+    {
+        var context = new LubrilogixDbContext();
+        try
+        {
+
+            // Create parameters
+            var idParameter = new SqlParameter("@TN_IdProducto", producto.TnIdProducto);
+            var nombreParameter = new SqlParameter("@TC_Nombre", producto.TcNombre);
+            var categoriaParameter = new SqlParameter("@TC_Categoria", producto.TcCategoria);
+            var subcategoriaParameter = new SqlParameter("@TC_Subcategoria", producto.TcSubcategoria);
+
+            // Call stored procedure
+
+            await Database.ExecuteSqlRawAsync(
+                 "EXEC dbo.spActualizarDatosProducto @TN_IdProducto, @TC_Nombre, @TC_Categoria, @TC_Subcategoria",
+                    idParameter, nombreParameter, categoriaParameter, subcategoriaParameter
+            );
+
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error updating provider: {ex.Message}");
+            throw new Exception($"Error updating provider: {ex.Message}", ex);
+        }
+    }
+    #endregion
+
+    #region Actualizar Sucursales
+
+
+    public async Task ActualizarSucursalesAsync(Sucursale sucursales)
+    {
+        var context = new LubrilogixDbContext();
+        try
+        {
+
+            // Create parameters
+            var idParameter = new SqlParameter("@TN_IdSucursal", sucursales.TnIdSucursal);
+            var nombreParameter = new SqlParameter("@TC_Nombre", sucursales.TcNombre);
+            var provinciaParameter = new SqlParameter("@TC_Provincia", sucursales.TcProvincia);
+            var direccionParameter = new SqlParameter("@TC_Direccion", sucursales.TcDireccion);
+            var telefonoParameter = new SqlParameter("@TC_Telefono", sucursales.TcTelefono);
+            var correoParameter = new SqlParameter("@TC_Correo", sucursales.TcCorreo);
+            var estadoParameter = new SqlParameter("@TC_Estado", sucursales.TcEstado);
+            var comentarioParameter = new SqlParameter("@TC_Comentarios", sucursales.TcComentarios);
+
+            // Call stored procedure
+
+            await Database.ExecuteSqlRawAsync(
+                "EXEC dbo.spActualizarDatosSucursal @TN_IdSucursal, @TC_Nombre, @TC_Provincia, @TC_Direccion, @TC_Telefono, @TC_Correo, @TC_Estado, @TC_Comentarios",
+                idParameter, nombreParameter, provinciaParameter, direccionParameter, telefonoParameter, correoParameter, estadoParameter, comentarioParameter
+            );
+
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error updating provider: {ex.Message}");
+            throw new Exception($"Error updating provider: {ex.Message}", ex);
+        }
+    }
+
+
+
+
+    #endregion
+    #endregion
+   
+
+  #endregion
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #endregion
-

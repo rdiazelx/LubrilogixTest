@@ -1,4 +1,10 @@
 ﻿$(document).ready(function () {
+    // Ensure userInSpecificGroup is defined
+    if (typeof userInSpecificGroup === 'undefined') {
+        console.error('userInSpecificGroup is not defined.');
+        return;
+    }
+
     // Initialize DataTable for the main table
     let table = $('#productosTable').DataTable({
         responsive: true,
@@ -8,9 +14,15 @@
         dom: 'lfrtip',
         order: [], // Prevent initial sorting
         columnDefs: [
-            { orderable: false, targets: [4] } // Disable sorting for the Edit column
+            { orderable: false, targets: userInSpecificGroup ? [4] : [] } // Disable sorting for the Edit column if present
         ],
-        buttons: [], // Disable all buttons
+        columns: [
+            { data: "TnIdProducto" },
+            { data: "TcNombre" },
+            { data: "TcCategoria" },
+            { data: "TcSubcategoria" },
+            { data: userInSpecificGroup ? "Edit" : null } // Include Edit column if present
+        ]
     });
 
     // Show or hide the Edit column based on the userInSpecificGroup value
@@ -42,19 +54,34 @@
     // Handle Save icon click
     $('#productosTable tbody').on('click', '.saveIcon', function () {
         let row = $(this).closest('tr');
-        let newData = [];
+        let newData = {};
 
         // Collect updated values
-        row.children('td').not(':last').each(function () {
+        row.children('td').not(':last').each(function (index) {
             let cell = $(this);
             let input = cell.find('input');
             let newValue = input.val();
             cell.text(newValue);
-            newData.push(newValue);
+
+            // Map new values to corresponding data properties
+            switch (index) {
+                case 0:
+                    newData["TnIdProducto"] = newValue;
+                    break;
+                case 1:
+                    newData["TcNombre"] = newValue;
+                    break;
+                case 2:
+                    newData["TcCategoria"] = newValue;
+                    break;
+                case 3:
+                    newData["TcSubcategoria"] = newValue;
+                    break;
+            }
         });
 
         // Add placeholder for the Edit column
-        newData.push('<i class="fas fa-edit editIcon"></i><i class="fas fa-save saveIcon" style="display:none;"></i>');
+        newData["Edit"] = '<i class="fas fa-edit editIcon"></i><i class="fas fa-save saveIcon" style="display:none;"></i>';
 
         // Update the DataTable
         table.row(row).data(newData).draw();
@@ -64,30 +91,28 @@
         $(this).hide();
 
         console.log('Updated row data:', newData);
-        // Call a function to update the database with `newData`
+
+        // Call a function to update the database with newData
+        updateProductoData(newData);
     });
 
-    // Filter by Nombre
-    $('#nombreFilterIcon').on('click', function () {
-        $('#nombreFilter').toggle();
-    });
-    $('#nombreFilter').on('keyup', function () {
-        table.column(1).search(this.value).draw();
-    });
+    function updateProductoData(data) {
+        console.log('Updating product with data:', data);
 
-    // Filter by Categoría
-    $('#categoriaFilterIcon').on('click', function () {
-        $('#categoriaFilter').toggle();
-    });
-    $('#categoriaFilter').on('keyup', function () {
-        table.column(2).search(this.value).draw();
-    });
+        // Construct the query string
+        let queryString = `?TnIdProducto=${data.TnIdProducto}&TcNombre=${encodeURIComponent(data.TcNombre)}&TcCategoria=${encodeURIComponent(data.TcCategoria)}&TcSubcategoria=${encodeURIComponent(data.TcSubcategoria)}`;
 
-    // Filter by Subcategoría
-    $('#subCategoriaFilterIcon').on('click', function () {
-        $('#subCategoriaFilter').toggle();
-    });
-    $('#subCategoriaFilter').on('keyup', function () {
-        table.column(3).search(this.value).draw();
-    });
+        // Send the data to the server via AJAX
+        $.ajax({
+            url: `/Lubrilogix/UpdateProductoData${queryString}`,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                console.log('Producto actualizado exitosamente', response);
+            },
+            error: function (error) {
+                console.error('Error actualizando el producto:', error);
+            }
+        });
+    }
 });

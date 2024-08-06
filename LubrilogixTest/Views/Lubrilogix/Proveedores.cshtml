@@ -30,7 +30,7 @@
     <thead>
         <tr>
             <th>
-               
+
                 <div class="filter-container">
                     <i class="fas fa-filter" id="nombreFilterIcon"></i>
                     <div class="filter-input">
@@ -123,8 +123,8 @@
                     <input type="text" id="proveedorNombre" placeholder="Ingrese el nombre del proveedor" required>
                 </div>
                 <div class="form-group">
-                    <label for="proveedorProvincia">Provincia del proveedor</label>
-                    <input type="text" id="proveedorProvincia" placeholder="Ingrese la provincia del proveedor" required>
+                    <label for="proveedorProducto">Nombre del producto que suministra</label>
+                    <input type="text" id="proveedorProducto" placeholder="Ingrese el nombre del producto que suministra" required>
                 </div>
                 <div class="form-group">
                     <label for="proveedorDireccion">Dirección</label>
@@ -133,14 +133,6 @@
                 <div class="form-group">
                     <label for="proveedorEmail">Email</label>
                     <input type="email" id="proveedorEmail" placeholder="Ingrese el email del proveedor" required>
-                </div>
-                <div class="form-group">
-                    <label for="proveedorEstado">Estado</label>
-                    <select id="proveedorEstado" required>
-                        <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>
-                    </select>
                 </div>
             </form>
         </div>
@@ -151,14 +143,13 @@
     </div>
 </div>
 
-
 @section Scripts {
-    <script src="~/js/proveedores.js"></script>
-    <script src="~/js/proveedoresfilters.js"></script>
+    <script src="~/js/Proveedores.js"></script>
+    <script src="~/js/proveedoresFilters.js"></script>
 
 
     <link href="~/css/modalstyles.css" rel="stylesheet" />
-    <script src="~/js/modalproveedor.js"></script>
+    <script src="~/js/modalProveedor.js"></script>
     <script>
         // Pass the Razor variable to a JavaScript variable
         var userInSpecificGroup = @Html.Raw(JsonConvert.SerializeObject(userInSpecificGroup));
