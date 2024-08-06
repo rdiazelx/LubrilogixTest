@@ -84,15 +84,15 @@ html, body {
 
 /* Adjustments to the main element */
 main {
-    height: 60rem; /* Set a specific height */
-    width:100%
+    width: 100%; /* Full width */
     background-color: white;
     margin: 0 auto; /* Center horizontally */
-    padding: 0rem; /* Increased padding around content */
-    transition: width 0.3s, height 0.3s; /* Smooth transition for both width and height */
+    padding: 1rem; /* Adjust padding around content as needed */
+    transition: width 0.3s, height 0.3s; /* Smooth transition for width and height */
     position: relative; /* Ensure proper positioning */
-    overflow: auto; /* Allows scrolling if content overflows */
+    min-height: 60rem; /* Ensure a minimum height if needed */
 }
+
 
     .main-container.blurred {
         filter: blur(5px); /* Adjust the blur intensity as needed */
@@ -161,47 +161,23 @@ main {
 }
 
 @media (max-width: 768px) {
-    .container-login {
-        width: 12rem; /* Smaller width for smaller screens */
-    }
-
     .sidebar {
         width: 10rem; /* Adjust width for smaller screens */
     }
 
-    main {
-        width: 100%;
-        padding: 1rem; /* Adjust padding for smaller screens */
-    }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-    .container-login {
-        width: 14rem; /* Adjust width */
-    }
-
     .sidebar {
         width: 11rem; /* Adjust width */
     }
-
-    main {
-        width: calc(100% - 15rem);
-        padding: 1.5rem;
-    }
+    
 }
 
 @media (min-width: 1025px) {
-    .container-login {
-        width: 15rem; /* Default width */
-    }
 
     .sidebar {
         width: 12rem; /* Default width */
-    }
-
-    main {
-        width: calc(100% - 15rem);
-        padding: 2rem;
     }
 }
 
