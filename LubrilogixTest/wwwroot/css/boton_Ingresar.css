@@ -1,84 +1,94 @@
-﻿.ingresar-container {
+﻿/* Ensure elements are displayed horizontally in .ingresar-container */
+.ingresar {
     width: 100%;
-    height: 5vh; /* Adjust height for viewport units */
+    height: 5rem; /* Adjust height for viewport units */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row; /* Arrange items horizontally */
+    justify-content: right; /* Center items horizontally */
     position: absolute;
+    background-color: green;
+    color: white;
+    border: 2px solid white;
     right: 0;
-    top: 0;
+    top: 0rem;
     box-sizing: border-box; /* Include padding and border in width/height */
+    padding: 0 1rem; /* Optional: Add padding if needed */
+    z-index: 950; /* Ensure this value is between .login and .welcome-message-container */
 }
 
+
+
+/* Style for .box-name */
+.box-name {
+    width: 25rem;
+    height: 4rem; /* Adjust height for viewport units */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-radius: 10px; /* Rounded corners */
+    position: absolute;
+    box-sizing: border-box; /* Include padding and border in width/height */
+    margin: 0 0.5rem; /* Optional: Add margin for spacing */
+    top: 0.5rem; /* Position it below the .welcome-message-container */
+    right: 8%;
+    z-index: 1000; /* Ensure this is below .welcome-message-container */
+}
+
+/* Style for .box */
 .box {
     width: 6%;
-    height: 4vh; /* Adjust height for viewport units */
+    height: 3rem; /* Adjust height for viewport units */
+    top: 1rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: darkgreen;
-    position: fixed;
-    top: 2%;
-    border-radius: 50px;
-    border: 2px solid #ddd;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    background-color: white;
+    position: absolute;
+    border-radius: 20px;
+    border: 2px solid red;
     box-sizing: border-box; /* Include padding and border in width/height */
+    margin: 0 0.5rem; /* Optional: Add margin if needed for spacing */
 }
+
+
 
 /* Adjust nav-link styles */
 .navbar-navT .nav-itemT .nav-linkT {
-    color: white !important;
+    color: green !important;
+    font-weight: bold
 }
 
     .navbar-navT .nav-itemT .nav-linkT:hover {
-        color: white !important;
+        color: red !important;
+        font-weight: bold
     }
-.welcome-message-container {
-    width: 100%;
-    max-width: 100%; /* Ensure the container doesn't exceed the viewport width */
-    height: 10vh; /* Adjust height based on viewport height */
-    display: flex;
-    background-color: transparent;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 1rem;
-    left: 0;
-    box-sizing: border-box; /* Include padding and border in width/height */
-    overflow: hidden; /* Hide overflow if necessary */
-}
 
-/* For screens larger than 2560px */
+
+/* Media Queries for responsiveness */
 @media (min-width: 2560px) {
     .welcome-message-container {
         height: 12vh; /* Adjust height for larger screens */
         font-size: 1.2rem; /* Adjust font size if needed */
+        background-color: red;
     }
 }
 
-/* For screens between 1920px and 2560px */
 @media (min-width: 1920px) and (max-width: 2559px) {
     .welcome-message-container {
         height: 11vh; /* Adjust height for these screens */
         font-size: 1.1rem; /* Adjust font size if needed */
+        background-color: red;
     }
 }
 
-/* For screens up to 1920px */
 @media (max-width: 1919px) {
     .welcome-message-container {
         height: 10vh; /* Default height for smaller screens */
         font-size: 1rem; /* Adjust font size if needed */
+        background-color: red;
     }
-}
-
-
-.box-name {
-    width: 15%;
-    height: 12vh; /* Adjust height for viewport units */
-    display: flex;
-    background-color: white;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    box-sizing: border-box; /* Include padding and border in width/height */
 }

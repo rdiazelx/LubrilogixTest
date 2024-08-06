@@ -38,76 +38,81 @@ html, body {
     flex-direction: column;
 }
 
+/* Container Style */
 .container {
     display: flex;
     justify-content: center; /* Center child elements */
     align-items: stretch; /* Ensure children take full height */
     width: 100%;
-
 }
 
+/* Main Container Style */
+.main-container {
+    width: 100%; /* Full width minus left and right margins */
+    margin: 0; /* Remove margins */
+    padding: 0rem; /* Padding inside the container */
+    border: 1px solid green; /* Adds a solid green border */
+    position: absolute; /* Ensure it stacks correctly */
+    z-index: 1; /* Ensure proper stacking context */
+    top: 5rem; /* Position from top */
+    left:4.5rem;
+    background-color: white;
+    box-sizing: border-box; /* Include border and padding in width calculation */
+    transition: filter 0.3s; /* Smooth transition for any filter effect */
+}
+
+/* Media Queries for Responsive Design */
+@media (min-width: 2560px) {
+    .main-container {
+        max-width: 97.5%; /* Adjust width for very large screens */
+    }
+}
+
+@media (min-width: 1920px) and (max-width: 2559px) {
+    .main-container {
+        max-width: 96%; /* Adjust width for large screens */
+    }
+}
+
+@media (max-width: 1919px) {
+    .main-container {
+        max-width: 100%; /* Full width for smaller screens */
+        margin: 0; /* Ensure no extra margins */
+        left: 0; /* Align to the left */
+    }
+}
+
+/* Adjustments to the main element */
 main {
-  
     height: 60rem; /* Set a specific height */
+    width:100%
     background-color: white;
     margin: 0 auto; /* Center horizontally */
-    padding: 2rem; /* Increased padding around content */
+    padding: 0rem; /* Increased padding around content */
     transition: width 0.3s, height 0.3s; /* Smooth transition for both width and height */
     position: relative; /* Ensure proper positioning */
     overflow: auto; /* Allows scrolling if content overflows */
 }
 
-.main-container {
-    width: 100%;
-    max-width: 120rem; /* Adjust this as needed */
-    margin-left: 1rem;
-    border: 1px solid green; /* Adds a 2px solid green border */
-    padding: 1rem; /* Optional: Adds padding inside the border */
-    transition: filter 0.3s; /* Smooth transition for the blur effect */
-    z-index: 1; /* Lower than the sidebar */
-    position: relative; /* Ensure it stacks below the sidebar */
-}
-@media (min-width: 2560px) {
-    .main-container {
-        max-width: 165rem; /* Adjust the width for larger screens */
-    }
-}
-
-/* For screens between 1920px and 2560px (1080p and smaller 2K monitors) */
-@media (min-width: 1920px) and (max-width: 2559px) {
-    .main-container {
-        max-width: 110rem; /* Default width or adjust as needed */
-    }
-}
-
-/* For screens up to 1920px (1080p monitor) */
-@media (max-width: 1919px) {
-    .main-container {
-        max-width: 100%; /* Full width for smaller screens */
-        margin-left: 0; /* Remove left margin if needed */
-    }
-}
-
-
     .main-container.blurred {
         filter: blur(5px); /* Adjust the blur intensity as needed */
     }
 
-
 /* Container Styles */
-.container-login {
-    width: 15rem; /* Adjusting to rem */
-    height: 100%;
+.login {
+    width: 100%; /* Full viewport width */
+    height: 1rem; /* Adjust height as needed */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
+    flex-direction: row; /* Ensure items are arranged in a horizontal row */
+    justify-content: center; /* Center items horizontally */
+    align-items: right; /* Center items vertically */
+    background-color: blueviolet;
     position: fixed;
-    right: 0;
     top: 0; /* Ensure it starts from the top */
+    left: 0; /* Ensure it starts from the left */
     margin: 0;
     padding: 0;
-    z-index: 1000; /* Make sure this value is high enough */
+    z-index: 1050; /* Make sure this value is high enough */
 }
 
 /* Sidebar Styles */
@@ -115,7 +120,7 @@ main {
     height: 100vh;
     width: 4.375rem; /* Collapsed width */
     position: fixed;
-    top: 0;
+    top: 5rem;
     left: 0;
     background-color: #343a40;
     border-right: 1px solid #ddd;
@@ -123,7 +128,7 @@ main {
     display: flex;
     flex-direction: column;
     transition: width 0.3s; /* Smooth transition */
-    z-index: 1000; /* Make sure this value is high enough */
+    z-index: 900; /* Make sure this value is high enough */
 }
 
     .sidebar.collapsed {

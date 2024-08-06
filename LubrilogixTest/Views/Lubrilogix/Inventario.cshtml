@@ -1,10 +1,14 @@
-﻿@{
+﻿@using Newtonsoft.Json
+@{
     ViewData["Title"] = "Inventario";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @model List<LubrilogixTest.Models.spLeerInventario_Result>
+
 <link href="~/css/inventariofilter.css" rel="stylesheet" />
+
+
 @{
     var specificGroupId = "724896d2-9e76-4f63-8129-1a22305cb5d5"; // IdGrupo LubrilogixAdmin
     var groupClaims = ViewBag.GroupClaims as List<string>;

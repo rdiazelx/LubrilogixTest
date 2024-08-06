@@ -1,25 +1,25 @@
 ﻿@using System.Security.Principal
 
 <link href="~/css/boton_ingresar.css" rel="stylesheet" />
-
+<h2> hika</h2>
 
 
 <ul class="navbar-navT">
 
+
     @if (User.Identity.IsAuthenticated)
     {
 
-        <div class="welcome-message-container">
-
+   
             <div class="box-name">
                 <span class="nav-item">
-                    <span class="navbar-text text-dark">Hola @User.Identity.Name!</span>
+                    <span>Hola @User.Identity.Name!</span>
                 </span>
             </div>
 
-        </div>
 
-        <div class="ingresar-container">
+
+        <div class="ingresar">
 
             <div class="box">
 
@@ -34,7 +34,7 @@
     }
     else
     {
-        <div class="ingresar-container">
+        <div class="ingresar">
             <div class="box">
                 <span class="nav-itemT">
                     <a class="nav-linkT" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Ingresar</a>
